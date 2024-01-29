@@ -1,15 +1,11 @@
 from fastapi import FastAPI
-from api.routes.generateFeedback import get_feedback
 from dotenv import load_dotenv
-from api.models.request.FeedbackRequest import FeedbackRequest
+from api.routes.gptRoutes import router as gpt_router
 
-
-#load Env
+#load .env
 load_dotenv()
 
 app = FastAPI()
 
-@app.post('/generate-feedback/', status_code=200)
-async def generate_feedback(requestBody: FeedbackRequest):
-    return  get_feedback(requestBody.userContent, requestBody.feedbacks)
-
+# add routes from gptRoute.py
+app.include_router(gpt_router, prefix="/api", tags=["GPT"])
