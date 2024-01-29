@@ -1,6 +1,6 @@
 from fastapi import FastAPI
 from dotenv import load_dotenv
-from api.routes.gptRoutes import router as gpt_router
+from api.routes.gpt_routes import router as gpt_router
 
 #load .env
 load_dotenv()

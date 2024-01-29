@@ -1,6 +1,6 @@
 from fastapi import APIRouter
-from api.services.gptServices import get_feedback
-from api.models.request.FeedbackRequest import FeedbackRequest
+from api.services.gpt_services import get_feedback
+from api.models.request.feedback_request import FeedbackRequest
 
 router = APIRouter()
 
