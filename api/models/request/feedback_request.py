@@ -1,19 +1,18 @@
-from pydantic import BaseModel
 from typing import List
+from pydantic import BaseModel
 
-class FeedbackResponseContent(BaseModel):
+class QuestionResponse(BaseModel):
     answer: str
     response_id: str
     email: str
     form_id: str
       
-class Feedback(BaseModel):
+class Question(BaseModel):
     title: str
     question_id: str
-    response: FeedbackResponseContent
+    response: QuestionResponse
 
 
 class FeedbackRequest(BaseModel):
-    userContent: Feedback
-    feedbacks: List[str] 
-
+    question: Question
+    feedbackList: List[str]

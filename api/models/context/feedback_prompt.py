@@ -34,6 +34,8 @@ context = """
 """
 
 def get_feedback_prompt(feedbacks):
+    """Generate a feedback prompt with examples."""
+
     return f"""
 
     {context}

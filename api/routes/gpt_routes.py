@@ -5,5 +5,6 @@ from api.models.request.feedback_request import FeedbackRequest
 router = APIRouter()
 
 @router.post('/generate-feedback/', status_code=200)
-async def generate_feedback(requestBody: FeedbackRequest):
-    return get_feedback(requestBody.userContent, requestBody.feedbacks)
+async def generate_feedback(request_body: FeedbackRequest):
+    """Endpoint for generating personalized feedback."""
+    return get_feedback(request_body.question, request_body.feedbackList)

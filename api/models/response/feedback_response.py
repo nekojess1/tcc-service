@@ -1,6 +1,6 @@
 from pydantic import BaseModel
 
-class ResponseContent(BaseModel):
+class QuestionResponse(BaseModel):
     answer: str
     response_id: str
     feedback: str
@@ -11,6 +11,4 @@ class ResponseContent(BaseModel):
 class FeedbackResponse(BaseModel):
     title: str
     question_id: str
-    response: ResponseContent
-
-
+    response: QuestionResponse
