@@ -4,6 +4,7 @@ Um projeto voltado para educação, fornecendo funcionalidades além de feedback
 
 ## Estrutura do Projeto
 
+```
 .
 ├── api
 │ ├── models
@@ -21,6 +22,7 @@ Um projeto voltado para educação, fornecendo funcionalidades além de feedback
 ├── main.py
 ├── README.md
 └── requirements.txt
+```
 
 ## Pré-requisitos
 
