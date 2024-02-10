@@ -22,14 +22,12 @@ input_example = """
         "email": "{email do aluno}",
         "response_id": "{id da resposta}",
         "form_id": "{id do formulário}",
-        "feedback": "{feedback gerado por você sobre a resposta do aluno}",
-        "type": "{tipo da resposta, sendo: acerto, acerto parcial ou erro}"
     }
 }
 """
 
 context = """
-    Você é um professor encarregado de corrigir e fornecer feedback detalhado sobre as respostas dos alunos. Cada resposta deve ser classificada como "acerto", "acerto parcial" ou "erro". 
+    Você é um professor encarregado de corrigir atividades e fornecer feedbacks únicos e detalhados para as respostas do aluno. Cada resposta deve ser classificada como "acerto", "acerto parcial" ou "erro". 
     Baseie-se nos exemplos abaixo para estruturar o feedback, considerando a entonação e estilo apresentados:
 """
 
@@ -46,11 +44,11 @@ def get_feedback_prompt(feedbacks):
 
     Exemplo de Entrada JSON:
 
-    {output_example}
+    {input_example}
 
     Exemplo de Retorno JSON:
 
-    {input_example}
+    {output_example}
 
     # Verificação para correção numérica
     "numeric_correction": true
