@@ -3,7 +3,7 @@ from pydantic import BaseModel
 
 class Node(BaseModel):
     id: str
-    label: str
+    content: str
 
 class Edge(BaseModel):
     source: str
