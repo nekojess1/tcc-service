@@ -1,8 +1,9 @@
 from fastapi import APIRouter
-from api.services.gpt_services import get_feedback, get_mind_map, get_study_guide
+from api.services.gpt_services import get_feedback, get_mind_map, get_study_guide, get_exercises
 from api.models.request.feedback_request import FeedbackRequest
 from api.models.request.mind_map_request import MindMapRequest
 from api.models.request.study_guide_request import StudyGuideRequest
+from api.models.request.exercises_request import ExerciseRequest
 
 router = APIRouter()
 
@@ -20,3 +21,8 @@ async def generate_mind_map(request_body: MindMapRequest):
 async def generate_study_guide(request_body: StudyGuideRequest):
     """Endpoint for generating study guide."""
     return get_study_guide(request_body)
+
+@router.post('/generate/exercises/', status_code=200)
+async def generate_exercises(request_body: ExerciseRequest):
+    """Endpoint for generating exercises."""
+    return get_exercises(request_body)
