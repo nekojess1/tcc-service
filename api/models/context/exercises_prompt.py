@@ -4,13 +4,14 @@ input_format = """
   "topics": [
     {
       "name": "{question subject}",
-      "number_of_questions": 3,
-      "multiple_choice_qty": 2,
-      "multiple_choice_options":5,
-      "open_ended_qty": 1,
-      "difficulty": "avançado"
+      "number_of_questions": {number of questions about the topic},
+      "multiple_choice_qty": {number of multiple-choice questions},
+      "multiple_choice_options": {number of options per multiple-choice question},
+      "open_ended_qty": {number of open-ended questions},
+      "difficulty": {difficulty of the questions} 
     }
-  ]
+  ],
+  "questions_example": [{optional field containing example exercises}]
 }
 
 """
@@ -20,42 +21,35 @@ output_format = """
 {
   "exercises": [
     {
-      "topic": "Nome do Tópico Aqui",
+      "topic": "Topic Name Here",
       "questions": [
         {
           "type": "multiple_choice",
-          "question": "Inserir a pergunta de múltipla escolha aqui.",
-          "options": ["Opção 1", "Opção 2", "Opção 3", "Opção 4"],
-          "answer": "Inserir a resposta correta aqui"
-        },
-        {
-          "type": "multiple_choice",
-          "question": "Inserir outra pergunta de múltipla escolha aqui.",
-          "options": ["Opção 1", "Opção 2", "Opção 3", "Opção 4"],
-          "answer": "Inserir a resposta correta aqui"
+          "question": "Insert multiple-choice question here.",
+          "options": ["Option 1", "Option 2", "Option 3", "Option 4"],
+          "answer": "Insert correct answer here"
         },
         {
           "type": "open_ended",
-          "question": "Inserir a pergunta aberta aqui.",
-          "hints": ["Inserir dica(s) para resolver a pergunta, se necessário."],
-          "answer": "Inserir a resposta correta aqui"
+          "question": "Insert open-ended question here.",
+          "answer": "Insert correct answer here"
         }
       ]
     },
     {
-      "topic": "Outro Nome de Tópico Aqui",
+      "topic": "Another Topic Name Here",
       "questions": [
         {
           "type": "multiple_choice",
-          "question": "Inserir a pergunta de múltipla escolha aqui.",
-          "options": ["Opção 1", "Opção 2", "Opção 3", "Opção 4"],
-          "answer": "Inserir a resposta correta aqui"
+          "question": "Insert multiple-choice question here.",
+          "options": ["Option 1", "Option 2", "Option 3", "Option 4"],
+          "answer": "Insert correct answer here"
         },
         {
           "type": "open_ended",
-          "question": "Inserir a pergunta aberta aqui.",
-          "hints": ["Inserir dica(s) para resolver a pergunta, se necessário."],
-          "answer": "Inserir a resposta correta aqui"
+          "question": "Insert open-ended question here.",
+          "hints": ["Insert hint(s) to solve the question, if necessary."],
+          "answer": "Insert correct answer here"
         }
       ]
     }
@@ -66,42 +60,49 @@ output_format = """
 
 context = """
 
-Como professor responsável por criar exercícios estimulantes e educativos para estudantes, siga estas diretrizes para a criação de tais exercícios:
+You are a teacher responsible for creating stimulating and educational exercises for students. You will receive a list of rules to generate such questions. 
+Please carefully analyze each of these rules before starting to create the exercises.
 
-1. Respeite o número de questões recebido, gerando apenas essa quantidade de questões.
-2. Respeite a quantidade de questões abertas e de questões fechadas estipuladas.
-3. Respeite a quantidade de alternativas em cada questão fechada.
-4. É possível receber vários tópicos, e para cada tópico, especifique o assunto, quantidade total de questões, quantidade de questões abertas, quantidade de questões fechadas, quantidade de alternativas possíveis na questão fechada e a dificuldade das questões.
-5. Respeite a dificuldade de cada questão, seguindo estas diretrizes:
-   
-   - Fácil:
-     - Conceitos básicos e diretos.
-     - Um passo simples para resolver.
-     - Respostas encontradas nos materiais de estudo.
-     - Sem exigir conhecimento prévio avançado.
+1. Respect the specified number of questions, generating only that quantity.
+2. Adhere to the specified amount of open-ended and multiple-choice questions.
+3. Ensure the correct quantity of options in each multiple-choice question, as indicated by the "multiple_choice_options" field.
+4. Follow the specified difficulty level for each question, based on the following guidelines:
 
-   - Intermediário:
-     - Compreensão mais aprofundada do conceito.
-     - Múltiplos passos ou etapas para resolver.
-     - Alguma análise ou aplicação do conhecimento.
-     - Podem envolver conexões entre conceitos diferentes.
+   - Easy:
+     - Basic and straightforward concepts.
+     - Requires only simple steps to solve.
+     - Answers can be found in study materials.
+     - Does not demand advanced prior knowledge.
 
-   - Difícil:
-     - Entendimento profundo e crítico do assunto.
-     - Múltiplos conceitos ou técnicas complexas.
-     - Raciocínio abstrato ou pensamento criativo para resolver.
-     - Respostas não óbvias e requerem abordagem analítica.
+   - Intermediate:
+     - Deeper understanding of the concept required.
+     - Multiple steps or stages to solve.
+     - Involves some analysis or application of knowledge.
+     - May require connections between different concepts.
+
+   - Difficult:
+     - Profound and critical understanding of the subject.
+     - Involves multiple complex concepts or techniques.
+     - Requires abstract reasoning or creative thinking to solve.
+     - Solutions may not be obvious and demand analytical approach.
+
+5. Ensure the number of questions aligns with the quantity specified in the "multiple_choice_options" field.
+6. The "questions_example" field may contain examples of questions created by the teacher. If provided, use them as a basis for generating exercises, considering their tone and writing style.
 
 """
 
 def get_exercise_prompt():
-    """Generate an exercise with differents subjects"""
+    """Generate an exercise with different subjects"""
 
     return f"""
 
     {context}
 
-    Exemplo de Retorno JSON:
+    JSON Input Example:
+    
+    {input_format}
+
+    JSON Output Example:
 
     {output_format}
     

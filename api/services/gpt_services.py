@@ -45,7 +45,7 @@ def get_mind_map(questions):
 def get_exercises(exercise_request: ExerciseRequest):
     """Generates personalized study guide using OpenAI gpt-4-0125-preview"""
     completion = openai.chat.completions.create(
-        model="gpt-3.5-turbo-0125",
+        model="gpt-4-0125-preview",
         response_format={ "type": "json_object" },
         messages=[
             {"role": "system", "content": get_exercise_prompt()},
