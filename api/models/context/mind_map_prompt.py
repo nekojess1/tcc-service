@@ -1,128 +1,113 @@
+input_example = """
+    {
+      "subject": "{subject}",
+      "language": "{response idiom}"
+    }
+    """
+    
 output_example = """
 {
   "nodes": [
-    { "id": "0", "content": "Resumos" },
-    { "id": "1", "content": "Segunda Guerra Mundial" },
-    { "id": "2", "content": "Motivos e Causas" },
-    { "id": "3", "content": "Disputas Territoriais e rivalidades políticas" },
-    { "id": "4", "content": "Ideologias conflitantes, como o nazismo e o fascismo" },
-    { "id": "5", "content": "Estopim" },
-    { "id": "6", "content": "Invasão da Polônia pela Alemanha nazista" },
-    { "id": "7", "content": "Duração" }
-    { "id": "8", "content": "Seis anos de conflito, de 1939 a 1945." }
-    { "id": "9", "content": "1939: Início com invasão da polônia pela Alemanha" },
-    { "id": "10", "content": "1941: Entrada dos EUA após o ataque a Pearl Harbor" },
-    { "id": "11", "content": "1945: Rendição da Alemanha e do Japão" }
-    { "id": "12", "content": "Principais Eventos" }
-    { "id": "13", "content": "Ataque japonês a Pearl Harbor, em dezembro de 1941." }
-    { "id": "14", "content": "Batalha de Stalingrado e Batalha de Kursk, no leste europeu." },
-    { "id": "15", "content": "Consequências" },
-    { "id": "16", "content": "Alemanha repartida entre os aliados" }
-    { "id": "17", "content": "Guerra Fria entre EUA e URSS" }
-    { "id": "18", "content": "Criação das Nações unidass" }
-    { "id": "19", "content": "Guerra Fria" },
-    { "id": "20", "content": "O que foi?" },
-    { "id": "21", "content": "Conflito ideológico e político entre Estados Unidos e União Soviética" },
-    { "id": "22", "content": "Período de tensão e rivalidade entre as superpotências mundiais" },
-    { "id": "23", "content": "Causou" },
-    { "id": "24", "content": "Corrida Armamentista" },
-    { "id": "25", "content": "Desenvolvimento de armas nucleares e estratégias de dissuasão" },
-    { "id": "26", "content": "Consequências" },
-    { "id": "27", "content": "Queda da União Soviética em 1991" },
-    { "id": "28", "content": "Ascensão dos Estados Unidos como superpotência dominante" },
-    { "id": "29", "content": "Queda do Muro de Berlim em 1989" }
-
-
-
+    { "id": "0", "description": "<Segunda Guerra Mundial>" },
+    { "id": "1", "description": "<Causas da Guerra>" },
+    { "id": "2", "description": "<Tratado de Versalhes<BR/>Reparações econômicas<BR/>Perda de territórios>" },
+    { "id": "3", "description": "<Ascensão do Nazismo e Fascismo<BR/>Alemanha: Adolf Hitler<BR/>Itália: Benito Mussolini>" },
+    { "id": "4", "description": "<Expansionismo Japonês<BR/>Invasão da Manchúria<BR/>Guerra Sino-Japonesa>" },
+    { "id": "5", "description": "<Fracasso da Liga das Nações<BR/>Incapacidade de manter a paz>" },
+    { "id": "6", "description": "<Política de Apaziguamento<BR/>Concessões às demandas de Hitler>" },
+    { "id": "7", "description": "<Principais Acontecimentos>" },
+    { "id": "8", "description": "<Início da Guerra (1939)<BR/>Invasão da Polônia pela Alemanha>" },
+    { "id": "9", "description": "<Batalhas e Campanhas Importantes<BR/>Batalha da França<BR/>Batalha da Grã-Bretanha<BR/>Operação Barbarossa (Invasão da União Soviética)<BR/>Ataque a Pearl Harbor<BR/>Batalha de Stalingrado<BR/>Desembarque da Normandia (Dia D)<BR/>Batalha de Midway>" },
+    { "id": "10", "description": "<Holocausto<BR/>Campos de concentração e extermínio<BR/>Genocídio de judeus e outras minorias>" },
+    { "id": "11", "description": "<Alianças e Lados Opositores>" },
+    { "id": "12", "description": "<Aliados<BR/>Estados Unidos<BR/>União Soviética<BR/>Reino Unido<BR/>França>" },
+    { "id": "13", "description": "<Eixo<BR/>Alemanha<BR/>Itália<BR/>Japão>" },
+    { "id": "14", "description": "<Tecnologia e Armas>" },
+    { "id": "15", "description": "<Armas Nucleares<BR/>Projetos Manhattan>" },
+    { "id": "16", "description": "<Aviões e Tanques<BR/>Desenvolvimento de aviões de combate<BR/>Evolução dos tanques de guerra>" },
+    { "id": "17", "description": "<Comunicações e Criptografia<BR/>Código Enigma<BR/>Máquinas de decifração (Bletchley Park)>" },
+    { "id": "18", "description": "<Consequências da Guerra>" },
+    { "id": "19", "description": "<Perdas Humanas e Destruição<BR/>Vítimas civis e militares<BR/>Devastação de cidades>" },
+    { "id": "20", "description": "<Tribunal de Nuremberg<BR/>Julgamento de crimes de guerra>" },
+    { "id": "21", "description": "<Criação da ONU<BR/>Objetivo de promover a paz mundial>" },
+    { "id": "22", "description": "<Guerra Fria<BR/>Divisão entre blocos capitalista (EUA) e socialista (URSS)>" },
+    { "id": "23", "description": "<Reconfiguração Geopolítica<BR/>Divisão da Alemanha<BR/>Novas fronteiras na Europa e Ásia>" },
+    { "id": "24", "description": "<Personagens Importantes>" },
+    { "id": "25", "description": "<Líderes dos Aliados<BR/>Franklin D. Roosevelt (EUA)<BR/>Winston Churchill (Reino Unido)<BR/>Joseph Stalin (URSS)>" },
+    { "id": "26", "description": "<Líderes do Eixo<BR/>Adolf Hitler (Alemanha)<BR/>Benito Mussolini (Itália)<BR/>Hirohito (Japão)>" },
+    { "id": "27", "description": "<Outros Personagens Relevantes<BR/>Dwight D. Eisenhower (Comandante Supremo Aliado)<BR/>Erwin Rommel (Marechal Alemão)<BR/>Anne Frank (Símbolo das vítimas do Holocausto)>" },
+    { "id": "28", "description": "<Cronologia da Guerra>" },
+    { "id": "29", "description": "<1939-1940: Início e Guerra Relâmpago (Blitzkrieg)>" },
+    { "id": "30", "description": "<1941-1942: Expansão do Eixo e Entrada dos EUA>" },
+    { "id": "31", "description": "<1943: Virada dos Aliados>" },
+    { "id": "32", "description": "<1944: Avanço dos Aliados>" },
+    { "id": "33", "description": "<1945: Fim da Guerra e Rendição dos Eixos>" }
   ],
   "edges": [
-    { "source": "0", "target": "1"},
-    { "source": "1", "target": "2"},
-    { "source": "1", "target": "5"},
-    { "source": "1", "target": "7"},
-    { "source": "1", "target": "12"},
-    { "source": "1", "target": "15"},
-    { "source": "2", "target": "3"},
-    { "source": "2", "target": "4"},
-    { "source": "5", "target": "6"},
-    { "source": "7", "target": "8"},
-    { "source": "7", "target": "9"},
-    { "source": "7", "target": "10"},
-    { "source": "7", "target": "11"},
-    { "source": "12", "target": "13"},
-    { "source": "12", "target": "14"},
-    { "source": "15", "target": "16"},
-    { "source": "15", "target": "17"},
-    { "source": "15", "target": "18"},
-    { "source": "0", "target": "19"},
-    { "source": "19", "target": "20"},
-    { "source": "19", "target": "23"},
-    { "source": "19", "target": "26"},
-    { "source": "19", "target": "17"},
-    { "source": "20", "target": "21"},
-    { "source": "20", "target": "22"},
-    { "source": "23", "target": "24"},
-    { "source": "23", "target": "25"},
-    { "source": "26", "target": "27"},
-    { "source": "26", "target": "28"},
-    { "source": "26", "target": "29"},
-    { "source": "28", "target": "16"},
+    { "from_node": "0", "to_node": "1" },
+    { "from_node": "0", "to_node": "7" },
+    { "from_node": "0", "to_node": "11" },
+    { "from_node": "0", "to_node": "14" },
+    { "from_node": "0", "to_node": "18" },
+    { "from_node": "0", "to_node": "24" },
+    { "from_node": "0", "to_node": "28" },
+    { "from_node": "1", "to_node": "2" },
+    { "from_node": "1", "to_node": "3" },
+    { "from_node": "1", "to_node": "4" },
+    { "from_node": "1", "to_node": "5" },
+    { "from_node": "1", "to_node": "6" },
+    { "from_node": "7", "to_node": "8" },
+    { "from_node": "7", "to_node": "9" },
+    { "from_node": "7", "to_node": "10" },
+    { "from_node": "11", "to_node": "12" },
+    { "from_node": "11", "to_node": "13" },
+    { "from_node": "14", "to_node": "15" },
+    { "from_node": "14", "to_node": "16" },
+    { "from_node": "14", "to_node": "17" },
+    { "from_node": "18", "to_node": "19" },
+    { "from_node": "18", "to_node": "20" },
+    { "from_node": "18", "to_node": "21" },
+    { "from_node": "18", "to_node": "22" },
+    { "from_node": "18", "to_node": "23" },
+    { "from_node": "24", "to_node": "25" },
+    { "from_node": "24", "to_node": "26" },
+    { "from_node": "24", "to_node": "27" },
+    { "from_node": "28", "to_node": "29" },
+    { "from_node": "28", "to_node": "30" },
+    { "from_node": "28", "to_node": "31" },
+    { "from_node": "28", "to_node": "32" },
+    { "from_node": "28", "to_node": "33" }
   ]
 }
-
 """
 
-input_example = """
-{
-   "perguntas":[
-      {
-         "titulo":"{título da pergunta}",
-         "respostas dos alunos":[
-            {
-               "resposta":"{resposta da pergunta}",
-               "marcadores":[
-                  {
-                     "tipo":"{acerto, acerto parcial ou erro}",
-                     "nome":"{trecho da resposta ao qual se refere o marcador}"
-                  }
-               ],
-               "feedback":"{feedback do professor}"
-            }
-         ]
-      }
-   ]
-}
+rules = """
+      1. Ao criar a descrição, caso seja extensa, use <BR/> para quebrar o texto e facilitar a visualização.
+      2. Envolva o texto da descrição com tags HTML, como "<Subtópico 1<BR/>com mais texto>".
+      3. O Mapa mental deve ter no máximo 10 níveis 
+      4. O idioma usado para criar a resposta está explícito no campo "language". Caso ele venha vazio, utilize o padrão "EN-US".
+      5. Ao pesquisar sobre o assunto, divida-o em diversos tópicos, cada um representado como um nó no mapa mental.
+     
 """
 
 def get_mind_map_prompt():
    return f"""
    Você é um professor e deseja criar um mapa mental para auxiliar os alunos nos estudos.
-   Você deverá seguir essas regras abaixo para gerar o grafo:
-
-   1 - Você receberá uma lista de perguntas e respostas dos alunos 
-   2 - Você observará as perguntas que mais tiverem respostas marcadas como "erro" ou "acerto parcial"
-   3 - Você armazenará os temas das perguntas que os alunos mais estão errando.
-   4 - Você fará uma pesquisa sobre os temas armazenados e coletará informações relevantes sobre eles. 
-   5 - Não é necessário se limitar ao tamanho dos textos do mapa mental.
-   6 - As respostas dos alunos nunca podem ser usadas como conteúdo no mapa mental
-   7 - Você nunca deve colocar conteúdo incorreto no mapa mental, somente os corretos, pois vão servir de estudo para os alunos
-   8 - O grafo deverá ter até no máximo 3 níveis 
-   9 - No grafo, quando tiver assuntos interligados, os mesmos devem ter um nó entre eles; 
-   10 - Explore a possibilidade de conexões entre diferentes temas no grafo, independentemente de terem o mesmo ponto de origem.
-   12 - Ao fazer a pesquisa, você deve escrever textos sobre cada conteúdo, e tirar os principais trechos dele para resumi-lo, seguindo o exemplo de saída.
-   13 - Você deverá adicionar tópicos que marcam o assunto, exemplo: Causa, Consequência, Ínicio, Desfecho. E assim, ligar novos nós a esses nó. 
-   14 - Não se limite a escrever sobre um assunto, pegue os principais pontos sobre cada assunto e coloque no mapa mental. 
+   Crie um mapa mental completo e detalhado do assunto no campo "subject"
    
-   Esse json vai ser o seu exemplo de entrada:
+   Regras:
+
+   {rules}
+    
+   JSON de entrada de exemplo:
 
    {input_example}
 
+   Retorne o mapa mental em formato JSON.
 
-   Você deverá retornar com o mapa mental em formato de json.
+   Exemplo de retorno:
 
-   Modelo de retorno:
-   
    {output_example}
-
-
+   
    """
+   

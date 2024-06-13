@@ -7,9 +7,9 @@ from api.models.context.feedback_prompt import get_feedback_prompt
 from api.models.context.mind_map_prompt import get_mind_map_prompt
 from api.models.context.study_guide_prompt import get_study_guide_prompt
 from api.models.context.exercises_prompt import get_exercise_prompt
-from api.models.common.Graph import Graph
 from api.models.request.study_guide_request import StudyGuideRequest
 from api.models.request.exercises_request import ExerciseRequest
+from api.util.graph import generate_mind_map, GraphStructure
 
 openai.api_key = os.environ.get("OPENAI_API_KEY")
 
@@ -26,21 +26,24 @@ def get_feedback(question, feedback_list):
     response = json.loads(completion.choices[0].message.content)
     return response
 
-def get_mind_map(questions):
+def get_mind_map(mindMapRequest):
     """Generates personalized feedback using OpenAI gpt-4-0125-preview"""
-    completion = openai.chat.completions.create(
-        model="gpt-4-0125-preview",
-        response_format={ "type": "json_object" },
-        messages=[
-            {"role": "system", "content": get_mind_map_prompt()},
-            {"role": "user", "content": str(questions)}
-        ]
-    )
+    try: 
+        completion = openai.chat.completions.create(
+            model="gpt-4-0125-preview",
+            response_format={ "type": "json_object" },
+            messages=[
+                {"role": "system", "content": get_mind_map_prompt()},
+                {"role": "user", "content": str(mindMapRequest)}
+            ]
+        )
 
-    response = json.loads(completion.choices[0].message.content)
-    custom_model_instance = Graph(**response)
-    generate_mind_map_pdf(custom_model_instance)
-    return response
+        response = json.loads(completion.choices[0].message.content)
+        custom_model_instance = GraphStructure(**response)
+        generate_mind_map(custom_model_instance)
+        return response
+    except:
+        print("something went worng ")
 
 def get_exercises(exercise_request: ExerciseRequest):
     """Generates personalized study guide using OpenAI gpt-4-0125-preview"""
@@ -67,14 +70,3 @@ def get_study_guide(story_guide_request: StudyGuideRequest):
     )
     response = json.loads(completion.choices[0].message.content)
     return response
-
-def generate_mind_map_pdf(graph: Graph):
-    randomNumber = str(random.random())
-    dot = graphviz.Digraph(comment='The Round Table', format='pdf', node_attr={'color': 'lightblue2', 'style': 'filled', 'imagescale' : 'true'})
-    for node in graph.nodes:
-        dot.node(node.id, node.content)
-        
-    for edge in graph.edges:
-        dot.edge(edge.source, edge.target, constraint='false')
-    file_name = f'{randomNumber}.dot'
-    dot.render(directory='doctest-output/', filename=file_name)

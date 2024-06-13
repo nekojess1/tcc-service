@@ -15,7 +15,7 @@ async def generate_feedback(request_body: FeedbackRequest):
 @router.post('/generate/mind-map/', status_code=200)
 async def generate_mind_map(request_body: MindMapRequest):
     """Endpoint for generating mind map."""
-    return get_mind_map(request_body.questions)
+    return get_mind_map(request_body)
 
 @router.post('/generate/study-guide/', status_code=200)
 async def generate_study_guide(request_body: StudyGuideRequest):
