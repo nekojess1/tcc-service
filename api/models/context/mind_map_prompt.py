@@ -1,47 +1,52 @@
-input_example = """
+input_format = """
     {
       "subject": "{subject}",
       "language": "{response idiom}"
     }
     """
     
+output_format = """
+        {"nodes": [{ "id": " ", "description": " " }],
+        "edges": [{ "from_node": " ", "to_node": " " }]}
+      """
+        
 output_example = """
 {
   "nodes": [
-    { "id": "0", "description": "<Segunda Guerra Mundial>" },
-    { "id": "1", "description": "<Causas da Guerra>" },
-    { "id": "2", "description": "<Tratado de Versalhes<BR/>Reparações econômicas<BR/>Perda de territórios>" },
-    { "id": "3", "description": "<Ascensão do Nazismo e Fascismo<BR/>Alemanha: Adolf Hitler<BR/>Itália: Benito Mussolini>" },
-    { "id": "4", "description": "<Expansionismo Japonês<BR/>Invasão da Manchúria<BR/>Guerra Sino-Japonesa>" },
-    { "id": "5", "description": "<Fracasso da Liga das Nações<BR/>Incapacidade de manter a paz>" },
-    { "id": "6", "description": "<Política de Apaziguamento<BR/>Concessões às demandas de Hitler>" },
-    { "id": "7", "description": "<Principais Acontecimentos>" },
-    { "id": "8", "description": "<Início da Guerra (1939)<BR/>Invasão da Polônia pela Alemanha>" },
-    { "id": "9", "description": "<Batalhas e Campanhas Importantes<BR/>Batalha da França<BR/>Batalha da Grã-Bretanha<BR/>Operação Barbarossa (Invasão da União Soviética)<BR/>Ataque a Pearl Harbor<BR/>Batalha de Stalingrado<BR/>Desembarque da Normandia (Dia D)<BR/>Batalha de Midway>" },
-    { "id": "10", "description": "<Holocausto<BR/>Campos de concentração e extermínio<BR/>Genocídio de judeus e outras minorias>" },
-    { "id": "11", "description": "<Alianças e Lados Opositores>" },
-    { "id": "12", "description": "<Aliados<BR/>Estados Unidos<BR/>União Soviética<BR/>Reino Unido<BR/>França>" },
-    { "id": "13", "description": "<Eixo<BR/>Alemanha<BR/>Itália<BR/>Japão>" },
-    { "id": "14", "description": "<Tecnologia e Armas>" },
-    { "id": "15", "description": "<Armas Nucleares<BR/>Projetos Manhattan>" },
-    { "id": "16", "description": "<Aviões e Tanques<BR/>Desenvolvimento de aviões de combate<BR/>Evolução dos tanques de guerra>" },
-    { "id": "17", "description": "<Comunicações e Criptografia<BR/>Código Enigma<BR/>Máquinas de decifração (Bletchley Park)>" },
-    { "id": "18", "description": "<Consequências da Guerra>" },
-    { "id": "19", "description": "<Perdas Humanas e Destruição<BR/>Vítimas civis e militares<BR/>Devastação de cidades>" },
-    { "id": "20", "description": "<Tribunal de Nuremberg<BR/>Julgamento de crimes de guerra>" },
-    { "id": "21", "description": "<Criação da ONU<BR/>Objetivo de promover a paz mundial>" },
-    { "id": "22", "description": "<Guerra Fria<BR/>Divisão entre blocos capitalista (EUA) e socialista (URSS)>" },
-    { "id": "23", "description": "<Reconfiguração Geopolítica<BR/>Divisão da Alemanha<BR/>Novas fronteiras na Europa e Ásia>" },
-    { "id": "24", "description": "<Personagens Importantes>" },
-    { "id": "25", "description": "<Líderes dos Aliados<BR/>Franklin D. Roosevelt (EUA)<BR/>Winston Churchill (Reino Unido)<BR/>Joseph Stalin (URSS)>" },
-    { "id": "26", "description": "<Líderes do Eixo<BR/>Adolf Hitler (Alemanha)<BR/>Benito Mussolini (Itália)<BR/>Hirohito (Japão)>" },
-    { "id": "27", "description": "<Outros Personagens Relevantes<BR/>Dwight D. Eisenhower (Comandante Supremo Aliado)<BR/>Erwin Rommel (Marechal Alemão)<BR/>Anne Frank (Símbolo das vítimas do Holocausto)>" },
-    { "id": "28", "description": "<Cronologia da Guerra>" },
-    { "id": "29", "description": "<1939-1940: Início e Guerra Relâmpago (Blitzkrieg)>" },
-    { "id": "30", "description": "<1941-1942: Expansão do Eixo e Entrada dos EUA>" },
-    { "id": "31", "description": "<1943: Virada dos Aliados>" },
-    { "id": "32", "description": "<1944: Avanço dos Aliados>" },
-    { "id": "33", "description": "<1945: Fim da Guerra e Rendição dos Eixos>" }
+    { "id": "0", "description": "World War II" },
+    { "id": "1", "description": "Causes of the War" },
+    { "id": "2", "description": "Treaty of Versailles Economic Reparations Loss of Territories" },
+    { "id": "3", "description": "Rise of Nazism and Fascism Germany: Adolf Hitler Italy: Benito Mussolini" },
+    { "id": "4", "description": "Japanese Expansionism Invasion of Manchuria Sino-Japanese War" },
+    { "id": "5", "description": "Failure of the League of Nations Inability to Maintain Peace" },
+    { "id": "6", "description": "Policy of Appeasement Concessions to Hitler's Demands" },
+    { "id": "7", "description": "Major Events" },
+    { "id": "8", "description": "Start of the War (1939) Invasion of Poland by Germany" },
+    { "id": "9", "description": "Important Battles and Campaigns Battle of France Battle of Britain Operation Barbarossa (Invasion of the Soviet Union) Attack on Pearl Harbor Battle of Stalingrad Normandy Landings (D-Day) Battle of Midway" },
+    { "id": "10", "description": "Holocaust Concentration and Extermination Camps Genocide of Jews and Other Minorities" },
+    { "id": "11", "description": "Alliances and Opposing Sides" },
+    { "id": "12", "description": "Allies United States Soviet Union United Kingdom France" },
+    { "id": "13", "description": "Axis Germany Italy Japan" },
+    { "id": "14", "description": "Technology and Weapons" },
+    { "id": "15", "description": "Nuclear Weapons Manhattan Project" },
+    { "id": "16", "description": "Planes and Tanks Development of Combat Planes Evolution of Tanks" },
+    { "id": "17", "description": "Communications and Cryptography Enigma Code Decryption Machines (Bletchley Park)" },
+    { "id": "18", "description": "Consequences of the War" },
+    { "id": "19", "description": "Human Losses and Destruction Civilian and Military Casualties Devastation of Cities" },
+    { "id": "20", "description": "Nuremberg Trials Trial of War Crimes" },
+    { "id": "21", "description": "Creation of the UN Aim to Promote World Peace" },
+    { "id": "22", "description": "Cold War Division Between Capitalist (USA) and Socialist (USSR) Blocs" },
+    { "id": "23", "description": "Geopolitical Reconfiguration Division of Germany New Borders in Europe and Asia" },
+    { "id": "24", "description": "Important Figures" },
+    { "id": "25", "description": "Allied Leaders Franklin D. Roosevelt (USA) Winston Churchill (United Kingdom) Joseph Stalin (USSR)" },
+    { "id": "26", "description": "Axis Leaders Adolf Hitler (Germany) Benito Mussolini (Italy) Hirohito (Japan)" },
+    { "id": "27", "description": "Other Relevant Figures Dwight D. Eisenhower (Supreme Allied Commander) Erwin Rommel (German Marshal) Anne Frank (Symbol of Holocaust Victims)" },
+    { "id": "28", "description": "War Timeline" },
+    { "id": "29", "description": "1939-1940: Beginning and Blitzkrieg" },
+    { "id": "30", "description": "1941-1942: Axis Expansion and US Entry" },
+    { "id": "31", "description": "1943: Allied Turnaround" },
+    { "id": "32", "description": "1944: Allied Advance" },
+    { "id": "33", "description": "1945: End of the War and Axis Surrender" }
   ],
   "edges": [
     { "from_node": "0", "to_node": "1" },
@@ -82,32 +87,33 @@ output_example = """
 """
 
 rules = """
-      1. Ao criar a descrição, caso seja extensa, use <BR/> para quebrar o texto e facilitar a visualização.
-      2. Envolva o texto da descrição com tags HTML, como "<Subtópico 1<BR/>com mais texto>".
-      3. O Mapa mental deve ter no máximo 10 níveis 
-      4. O idioma usado para criar a resposta está explícito no campo "language". Caso ele venha vazio, utilize o padrão "EN-US".
-      5. Ao pesquisar sobre o assunto, divida-o em diversos tópicos, cada um representado como um nó no mapa mental.
-     
+      1. The language used to create the response is specified in the "language" field. If it is empty, use "EN-US" by default.
+      2. When researching the subject, divide it into various topics, each represented as a node in the mind map.
+      3. A node must always have a connection. It cannot be isolated in the map.
+      4. Follow the structure of the output example.
 """
 
 def get_mind_map_prompt():
    return f"""
-   Você é um professor e deseja criar um mapa mental para auxiliar os alunos nos estudos.
-   Crie um mapa mental completo e detalhado do assunto no campo "subject"
+   You are a teacher and want to create a mind map to help students with their studies.
+   Create a complete and detailed mind map of the subject in the "subject" field.
    
-   Regras:
+   Rules:
 
    {rules}
     
-   JSON de entrada de exemplo:
+   Input format:
 
-   {input_example}
+   {input_format}
+   
+   Output format:
+   
+   {output_format}
 
-   Retorne o mapa mental em formato JSON.
+   Return the mind map in JSON format.
 
-   Exemplo de retorno:
+   Example filled return:
 
    {output_example}
    
    """
-   

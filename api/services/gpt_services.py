@@ -1,8 +1,6 @@
 import openai
-import graphviz 
 import json 
 import os
-import random
 from api.models.context.feedback_prompt import get_feedback_prompt
 from api.models.context.mind_map_prompt import get_mind_map_prompt
 from api.models.context.study_guide_prompt import get_study_guide_prompt
@@ -28,22 +26,18 @@ def get_feedback(question, feedback_list):
 
 def get_mind_map(mindMapRequest):
     """Generates personalized feedback using OpenAI gpt-4-0125-preview"""
-    try: 
-        completion = openai.chat.completions.create(
-            model="gpt-4-0125-preview",
-            response_format={ "type": "json_object" },
-            messages=[
-                {"role": "system", "content": get_mind_map_prompt()},
-                {"role": "user", "content": str(mindMapRequest)}
-            ]
-        )
-
-        response = json.loads(completion.choices[0].message.content)
-        custom_model_instance = GraphStructure(**response)
-        generate_mind_map(custom_model_instance)
-        return response
-    except:
-        print("something went worng ")
+    completion = openai.chat.completions.create(
+        model="gpt-4-0125-preview",
+        response_format={ "type": "json_object" },
+        messages=[
+            {"role": "system", "content": get_mind_map_prompt()},
+            {"role": "user", "content": str(mindMapRequest)}
+        ]
+    )
+    response = json.loads(completion.choices[0].message.content)
+    custom_model_instance = GraphStructure(**response)
+    generate_mind_map(custom_model_instance)
+    return response
 
 def get_exercises(exercise_request: ExerciseRequest):
     """Generates personalized study guide using OpenAI gpt-4-0125-preview"""
