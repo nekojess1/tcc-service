@@ -1,6 +1,5 @@
-# controllers/mind_map_controller.py
-from fastapi import APIRouter
-from api.services.gpt_services import get_mind_map
+from fastapi import APIRouter, HTTPException
+from api.services.mind_map_service import get_mind_map
 from api.models.request.mind_map_request import MindMapRequest
 
 router = APIRouter()

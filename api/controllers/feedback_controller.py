@@ -1,6 +1,5 @@
-# controllers/feedback_controller.py
 from fastapi import APIRouter, HTTPException
-from api.services.gpt_services import get_feedback
+from api.services.feedback_service import get_feedback
 from api.models.request.feedback_request import FeedbackRequest
 
 router = APIRouter()

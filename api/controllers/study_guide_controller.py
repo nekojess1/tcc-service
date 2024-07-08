@@ -1,6 +1,5 @@
-# controllers/study_guide_controller.py
-from fastapi import APIRouter
-from api.services.gpt_services import get_study_guide
+from fastapi import APIRouter, HTTPException
+from api.services.study_guide_service import get_study_guide
 from api.models.request.study_guide_request import StudyGuideRequest
 
 router = APIRouter()

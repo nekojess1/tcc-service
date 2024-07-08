@@ -1,6 +1,5 @@
-# controllers/exercises_controller.py
-from fastapi import APIRouter
-from api.services.gpt_services import get_exercises
+from fastapi import APIRouter, HTTPException
+from api.services.exercises_service import get_exercises
 from api.models.request.exercises_request import ExerciseRequest
 
 router = APIRouter()
