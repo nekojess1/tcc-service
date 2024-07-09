@@ -1,6 +1,6 @@
 ## Descrição
 
-Um projeto voltado para educação, fornecendo funcionalidades além de feedback, com base no modelo GPT.
+Este projeto utiliza a inteligência artificial generativa, em especial o modelo GPT da OpenAI, para apoiar educadores. Ele oferece funcionalidades como correção de respostas com feedback, geração de mapas mentais, guias de estudo e exercícios personalizados, melhorando a experiência de aprendizado e auxiliando o trabalho dos educadores.
 
 ## Estrutura do Projeto
 
@@ -70,14 +70,15 @@ OPENAI_API_KEY=your_openai_api_key
 pip install -r requirements.txt
 ```
 
-## Rotas
+## Endpoints
 
 
 <details>
   <summary>Gerar Feedback</summary>&nbsp;
 
+   Este endpoint permite gerar feedback personalizado com base na resposta do aluno. A resposta é processada utilizando o modelo GPT da OpenAI para fornecer feedback construtivo.
    
-   - Endpoint:
+   - Rota:
 
 ```bash
 /feedback/generate/
@@ -121,6 +122,200 @@ POST
         "wrong_snippets": ["{trechos da resposta marcadas como errada}"]
     }
 }
+
+```
+
+ </details>
+
+ <details>
+  <summary>Gerar Mapa Mental</summary>&nbsp;
+   
+Este endpoint gera um mapa mental com base no conteúdo fornecido na requisição.
+   
+   - Rota:
+
+```bash
+/mind-map/generate/
+```
+   - Método:
+```bash
+POST
+```
+
+- Request:
+
+```json
+{
+  "subject": "string",
+  "language": "string"
+}
+
+```
+
+
+- Response:
+
+```json
+
+  {
+    "nodes": [
+      { "id": "string", "description": "string" }
+    ],
+    "edges": [
+      { "from_node": "string", "to_node": "string"}
+    ]
+  }
+      
+
+```
+
+ </details>
+
+  <details>
+  <summary>Gerar Guia de Estudo</summary>&nbsp;
+   
+Este endpoint gera um guia de estudo estruturado com base nos tópicos fornecidos na requisição, quantidade de dias, dias da semana e horas por dia.
+   
+   - Rota:
+
+```bash
+/study-guide/generate/
+```
+   - Método:
+```bash
+POST
+```
+
+- Request:
+
+```json
+
+{
+  "daysDuration": 0,
+  "daysOfWeek": [
+    "string"
+  ],
+  "hoursPerDay": "string",
+  "topics": [
+    "string"
+  ],
+  "language": "string"
+}
+
+```
+
+
+- Response:
+
+```json
+
+{
+    "guide": [
+        {
+            "day": "{study day number}",
+            "dayOfWeek": "{day of the week, like Monday}",
+            "contents": [
+                {
+                    "studySubject": {
+                        "subject": "{subject of study}",
+                        "topic": "{topics of the subject}",
+                        "description": "{description of what should be studied, including main points}",
+                        "supportingMaterials": ["list of recommended materials, such as books, films, etc."],
+                        "hoursOfStudy": "{study hours for this topic}"
+                    }
+                }
+            ]
+        }
+    ]
+}
+      
+
+```
+
+ </details>
+
+ 
+  <details>
+  <summary>Gerar Exercícios</summary>&nbsp;
+   
+Este endpoint gera exercícios com base na lista de assuntos recebida. Pode se definir a quantidade de questões, a dificuldade, se é múltipla escolha ou não e a quantidade de alternativas. 
+   
+   - Rota:
+
+```bash
+/study-guide/generate/
+```
+   - Método:
+```bash
+POST
+```
+
+- Request:
+
+```json
+
+{
+  "topics": [
+    {
+      "name": "string",
+      "number_of_questions": 0,
+      "difficulty": "string",
+      "multiple_choice_qty": 0,
+      "multiple_choice_options": 0,
+      "open_ended_qty": 0
+    }
+  ],
+  "questions_example": [
+    "string"
+  ]
+}
+
+```
+
+
+- Response:
+
+```json
+
+{
+  "exercises": [
+    {
+      "topic": "Topic Name Here",
+      "questions": [
+        {
+          "type": "multiple_choice",
+          "question": "Insert multiple-choice question here.",
+          "options": ["Option 1", "Option 2", "Option 3", "Option 4"],
+          "answer": "Insert correct answer here"
+        },
+        {
+          "type": "open_ended",
+          "question": "Insert open-ended question here.",
+          "answer": "Insert correct answer here"
+        }
+      ]
+    },
+    {
+      "topic": "Another Topic Name Here",
+      "questions": [
+        {
+          "type": "multiple_choice",
+          "question": "Insert multiple-choice question here.",
+          "options": ["Option 1", "Option 2", "Option 3", "Option 4"],
+          "answer": "Insert correct answer here"
+        },
+        {
+          "type": "open_ended",
+          "question": "Insert open-ended question here.",
+          "hints": ["Insert hint(s) to solve the question, if necessary."],
+          "answer": "Insert correct answer here"
+        }
+      ]
+    }
+  ]
+}
+
+      
 
 ```
 
