@@ -7,36 +7,64 @@ Um projeto voltado para educação, fornecendo funcionalidades além de feedback
 ```
 .
 ├── api
-│ ├── models
-│ │ ├── context
-│ │ │ └── feedback_prompt.py
-│ │ ├── request
-│ │ │ └── feedback_request.py
-│ │ └── response
-│ │ └── feedback_response.py
-│ ├── routes
-│ │ └── generate_feedback.py
-│ └── services
-│ └── generate_feedback.py
+│   ├── controllers
+│   │   ├── feedback_controller.py
+│   │   ├── mind_map_controller.py
+│   │   ├── study_guide_controller.py
+│   │   └── exercises_controller.py
+│   ├── models
+│   │   ├── prompts
+│   │   │   ├── feedback_prompt.py
+│   │   │   ├── mind_map_prompt.py
+│   │   │   ├── study_guide_prompt.py
+│   │   │   └── exercises_prompt.py
+│   │   ├── request
+│   │   │   ├── feedback_request.py
+│   │   │   ├── mind_map_request.py
+│   │   │   ├── study_guide_request.py
+│   │   │   └── exercises_request.py
+│   │   └── response
+│   │       └── feedback_response.py
+│   ├── routes
+│   │   ├── feedback_routes.py
+│   │   ├── mind_map_routes.py
+│   │   ├── study_guide_routes.py
+│   │   └── exercises_routes.py
+│   └── services
+│       ├── gpt_services.py
+│       ├── feedback_service.py
+│       ├── mind_map_service.py
+│       ├── study_guide_service.py
+│       └── exercises_service.py
 ├── .env
 ├── main.py
 ├── README.md
 └── requirements.txt
+
 ```
+
+## Estrutura de Diretórios
+
+- **api/controllers/**: Controladores que recebem as requisições HTTP, chamam os serviços correspondentes e retornam as respostas.
+- **api/models/prompts/**: Prompts para interação com o modelo GPT da OpenAI.
+- **api/models/request/**: Modelos de requisição para estruturar os dados recebidos nas requisições HTTP.
+- **api/models/response/**: Modelos de resposta para estruturar os dados retornados pelos serviços.
+- **api/routes/**: Definição das rotas da API FastAPI para cada funcionalidade.
+- **api/services/**: Lógica de negócio dos serviços que interagem com a API da OpenAI e processam os dados.
+
 
 ## Pré-requisitos
 
-Antes de começar, certifique-se de criar um arquivo `.env` com a variável `OPENAI_API_KEY` contendo a chave da API do OpenAI.
+1. Configure Chave da API OpenAI
+
+Antes de começar, certifique-se de criar um arquivo `.env` com a variável `OPENAI_API_KEY` contendo a chave da API do OpenAI. Esta chave permite que a aplicação se autentique e faça solicitações aos modelos de inteligência artificial da OpenAI
 
 Exemplo:
 
 ```bash
 OPENAI_API_KEY=your_openai_api_key
 ```
-
-## Configuração do Ambiente
-
-1. Instale as dependências:
+2. Instale as dependências:
 
 ```bash
 pip install -r requirements.txt
@@ -44,33 +72,60 @@ pip install -r requirements.txt
 
 ## Rotas
 
-- Gerar Feedback 
 
-    Endpoint:
-    ```bash
-    /generate-feedback/
-    ```
-    Método:
-    ```bash
-    POST
-    ```
+<details>
+  <summary>Gerar Feedback</summary>&nbsp;
 
-        
+   
+   - Endpoint:
 
-    Corpo da Requisição (JSON):
+```bash
+/feedback/generate/
+```
+   - Método:
+```bash
+POST
+```
 
-    ```json
-    {
-        "title": "Título da Pergunta",
-        "question_id": "ID da Pergunta",
-        "response": {
-            "answer": "Resposta do Aluno à Pergunta",
-            "email": "Email do Aluno",
-            "response_id": "ID da Resposta",
-            "form_id": "ID do Formulário"
-        }
+- Request:
+
+```json
+{
+  "question": {
+    "title": "string",
+    "question_id": "string",
+    "response": {
+      "answer": "string",
+      "response_id": "string"
     }
-    ```
+  },
+  "feedbackList": [
+    "string"
+  ]
+}
+
+```
+
+
+- Response:
+
+```json
+{
+    "title": "{título da pergunta}",
+    "question_id": "{id da pergunta}",
+    "response": {
+        "answer": "{resposta do aluno à pergunta}",
+        "response_id": "{id da resposta}",
+        "feedback": "{feedback gerado por você sobre a resposta do aluno}",
+        "type": "{tipo da resposta, sendo: acerto, acerto parcial ou erro}",
+        "wrong_snippets": ["{trechos da resposta marcadas como errada}"]
+    }
+}
+
+```
+
+ </details>
+
 ## Documentação Swagger:
 Você pode visualizar a documentação Swagger interativa para explorar os detalhes e testar o endpoint em 
 
