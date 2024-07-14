@@ -4,7 +4,7 @@ from api.models.request.exercises_request import ExerciseRequest
 
 router = APIRouter()
 
-@router.post('/generate/exercises/', status_code=200)
+@router.post('/generate/', status_code=200)
 async def generate_exercises(request_body: ExerciseRequest):
     """Endpoint para gerar exercícios."""
     try:

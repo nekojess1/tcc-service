@@ -1,6 +1,6 @@
 from fastapi import FastAPI
 from dotenv import load_dotenv
-from api.routes.gpt_routes import router as gpt_router
+from api.routes.routes import router as service_routes
 import openai
 from api.config.settings import settings
 
@@ -13,4 +13,4 @@ openai.api_key = settings.openai_api_key
 app = FastAPI()
 
 # Incluir rotas do gpt_routes
-app.include_router(gpt_router)
+app.include_router(service_routes)
