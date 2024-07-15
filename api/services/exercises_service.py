@@ -1,6 +1,6 @@
 import openai
 import json
-from api.models.prompts.exercises_prompt import get_exercise_prompt
+from api.models.prompts.exercises.exercises_prompt import get_exercise_prompt
 from api.models.request.exercises_request import ExerciseRequest
 
 def get_exercises(exercise_request: ExerciseRequest):
