@@ -25,3 +25,30 @@ input_example = """
 
 }
 """
+
+rule_example = """
+Input:
+    {
+        "title": "What is the basic process of photosynthesis in plants?",
+        "question_id": "123123",
+        "response": {
+            "answer": "Photosynthesis is the process by which plants, using solar energy, convert carbon dioxide and oxygen into glucose and water.",
+            "email": "student@mail.com",
+            "response_id": "123123-12",
+        },
+        "language": "English"
+    }
+Output:
+    {
+        "title": "What is the basic process of photosynthesis in plants?",
+        "question_id": "123123",
+        "response": {
+            "answer": "Photosynthesis is the process by which plants, using solar energy, convert carbon dioxide and oxygen into glucose and water.",
+            "response_id": "123123-12",
+            "feedback": "Your response has a basic understanding of photosynthesis, but there is a small misconception in how you described the process. In photosynthesis, plants use carbon dioxide (CO2) and water (H2O) to produce glucose (C6H12O6) and release oxygen (O2) as a byproduct. You reversed the products and reactants in your response. Make sure to review this part to ensure accuracy in describing the process.",
+            "type": "partially correct",
+            "wrong_snippets": ["convert carbon dioxide and oxygen into glucose and water"]
+        }
+    }
+
+"""
