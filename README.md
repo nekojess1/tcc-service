@@ -14,10 +14,22 @@ Este projeto utiliza a inteligência artificial generativa, em especial o modelo
 │   │   └── exercises_controller.py
 │   ├── models
 │   │   ├── prompts
-│   │   │   ├── feedback_prompt.py
-│   │   │   ├── mind_map_prompt.py
-│   │   │   ├── study_guide_prompt.py
-│   │   │   └── exercises_prompt.py
+│   │   │   ├── exercises
+│   │   │   │   ├── exercises_prompt.py
+│   │   │   │   ├── exercises_examples.py
+│   │   │   │   └── exercises_instructions.txt
+│   │   │   ├── mind_maps
+│   │   │   │   ├── mind_map_prompt.py
+│   │   │   │   ├── mind_map_examples.py
+│   │   │   │   └── mind_map_instructions.txt
+│   │   │   ├── study_guides
+│   │   │   │   ├── study_guide_prompt.py
+│   │   │   │   ├── study_guide_examples.json
+│   │   │   │   └── study_guide_instructions.txt
+│   │   │   └── feedbacks
+│   │   │       ├── feedback_prompt.py
+│   │   │       ├── feedback_examples.py
+│   │   │       └── feedback_instructions.txt
 │   │   ├── request
 │   │   │   ├── feedback_request.py
 │   │   │   ├── mind_map_request.py
