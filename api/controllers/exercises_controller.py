@@ -1,6 +1,6 @@
 from fastapi import APIRouter, HTTPException
 from api.services.exercises_service import get_exercises
-from api.models.request.exercises_request import ExerciseRequest
+from api.models.requests.exercises_request import ExerciseRequest
 
 router = APIRouter()
 
