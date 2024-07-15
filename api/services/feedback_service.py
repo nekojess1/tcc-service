@@ -1,6 +1,6 @@
 import openai
 import json
-from api.models.prompts.feedback_prompt import get_feedback_prompt
+from api.models.prompts.feedbacks.feedback_prompt import get_feedback_prompt
 
 def get_feedback(question, feedback_list):
     """Generates personalized feedback using OpenAI GPT-3.5 Turbo"""
