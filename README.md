@@ -70,6 +70,14 @@ OPENAI_API_KEY=your_openai_api_key
 pip install -r requirements.txt
 ```
 
+3. Como executar:
+
+Para executar o projeto, utilize o seguinte comando no terminal:
+
+```bash
+uvicorn main:app --reload
+```
+
 ## Endpoints
 
 
@@ -328,3 +336,5 @@ Você pode visualizar a documentação Swagger interativa para explorar os detal
 http://127.0.0.1:8000/docs
 
 Lembre-se de que, para acessar a documentação Swagger, o servidor FastAPI precisa estar em execução localmente.
+
+
