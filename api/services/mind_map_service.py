@@ -1,7 +1,7 @@
 import openai
 import json
-from api.models.prompts.mind_map_prompt import get_mind_map_prompt
-from api.util.graph import generate_mind_map, GraphStructure
+from api.models.prompts.mind_maps.mind_map_prompt import get_mind_map_prompt
+from api.utils.graph import generate_mind_map, GraphStructure
 
 def get_mind_map(mindMapRequest):
     """Generates personalized feedback using OpenAI gpt-4-0125-preview"""

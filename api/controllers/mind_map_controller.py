@@ -1,6 +1,6 @@
 from fastapi import APIRouter, HTTPException
 from api.services.mind_map_service import get_mind_map
-from api.models.request.mind_map_request import MindMapRequest
+from api.models.requests.mind_map_request import MindMapRequest
 
 router = APIRouter()
 
