@@ -1,7 +1,7 @@
 import openai
 import json
-from api.models.prompts.study_guide_prompt import get_study_guide_prompt
-from api.models.request.study_guide_request import StudyGuideRequest
+from api.models.prompts.study_guides.study_guide_prompt import get_study_guide_prompt
+from api.models.requests.study_guide_request import StudyGuideRequest
 
 def get_study_guide(story_guide_request: StudyGuideRequest):
     """Generates an exercise using OpenAI gpt-4-0125-preview"""

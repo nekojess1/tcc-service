@@ -6,8 +6,8 @@ input_format = """
     """
     
 output_format = """
-        {"nodes": [{ "id": " ", "description": " " }],
-        "edges": [{ "from_node": " ", "to_node": " " }]}
+        {"nodes": [{ "id": "{node id}", "description": "{content}" }],
+        "edges": [{ "from_node": "{origin id node}", "to_node": "{destiny id node}" }]}
       """
         
 output_example = """
@@ -85,35 +85,3 @@ output_example = """
   ]
 }
 """
-
-rules = """
-      1. The language used to create the response is specified in the "language" field. If it is empty, use "EN-US" by default.
-      2. When researching the subject, divide it into various topics, each represented as a node in the mind map.
-      3. A node must always have a connection. It cannot be isolated in the map.
-      4. Follow the structure of the output example.
-"""
-
-def get_mind_map_prompt():
-   return f"""
-   You are a teacher and want to create a mind map to help students with their studies.
-   Create a complete and detailed mind map of the subject in the "subject" field.
-   
-   Rules:
-
-   {rules}
-    
-   Input format:
-
-   {input_format}
-   
-   Output format:
-   
-   {output_format}
-
-   Return the mind map in JSON format.
-
-   Example filled return:
-
-   {output_example}
-   
-   """
