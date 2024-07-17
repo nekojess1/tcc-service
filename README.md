@@ -78,6 +78,8 @@ OPENAI_API_KEY=your_openai_api_key
 ```
 2. Instale as dependências:
 
+Para realizar esse passo é necessário ter python instalado. A versão utilizada foi a 3.12.4.
+
 ```bash
 pip install -r requirements.txt
 ```
@@ -87,7 +89,7 @@ pip install -r requirements.txt
 Para executar o projeto, utilize o seguinte comando no terminal:
 
 ```bash
-uvicorn main:app --reload
+python -m uvicorn main:app --reload
 ```
 
 ## Endpoints
