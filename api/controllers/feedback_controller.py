@@ -8,7 +8,7 @@ router = APIRouter()
 async def generate_feedback(request_body: FeedbackRequest):
     """Endpoint para gerar feedback personalizado."""
     try:
-        feedback_list = request_body.feedback_list
+        feedback_list = request_body.feedbackList
         question = request_body.question
 
         if not question:

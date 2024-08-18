@@ -12,3 +12,4 @@ class TopicRequest(BaseModel):
 class ExerciseRequest(BaseModel):
     topics: List[TopicRequest]
     questions_example: List[str]
+    language: str

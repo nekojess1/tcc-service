@@ -21,8 +21,8 @@ input_example = """
         "email": "{student's email}",
         "response_id": "{response id}",
     },
+    "feedbackList": [list of feedbacks]
     "language": "{language of the response}"
-
 }
 """
 

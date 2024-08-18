@@ -7,6 +7,7 @@ from pydantic import BaseModel
 class Node(BaseModel):
     id: str
     description: str
+    is_common_error: bool
     color: Optional[str] = "darkolivegreen3"
     shape: Optional[str] = "box"
     style: Optional[str] = "solid"
@@ -23,14 +24,20 @@ class GraphStructure(BaseModel):
     
 
 def get_graph(graph_structure: GraphStructure) -> Digraph:
-    dot = Digraph(comment='Mapa Mental')
+    dot = Digraph(comment='Mapa Mental', engine='circo')
     for node in graph_structure.nodes:
-        dot.node(node.id, node.description, color=node.color, shape=node.shape, style=node.style)
-    
+        dot.node(node.id, node.description, color = get_error_color(node.is_common_error), shape=node.shape, style=node.style)
     for edge in graph_structure.edges:
         dot.edge(edge.from_node, edge.to_node, color=edge.color, style=edge.style)
+    print(dot)
     return dot
 
+def get_error_color(isCommonError: bool):
+    if isCommonError:
+        return "indianred"
+    else:
+        return "darkolivegreen3"
+    
 def generate_mind_map(graph_structure: GraphStructure):
     dot = get_graph(graph_structure)
     img_stream = io.BytesIO()
