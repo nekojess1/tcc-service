@@ -24,18 +24,17 @@ class GraphStructure(BaseModel):
     edges: List[Edge]
 
 def get_color_from_percentage(percentage):
-    colorscale = px.colors.sequential.Plasma
+    colorscale = px.colors.sequential.Viridis
     color_idx = int((percentage / 100) * (len(colorscale) - 1))
     return colorscale[color_idx]
 
 def get_graph(graph_structure: GraphStructure) -> Digraph:
     dot = Digraph(comment='Mapa Mental', engine='fdp')
-
+    print(graph_structure)
     for node in graph_structure.nodes:
         dot.node(node.id, node.description, color = get_color_from_percentage(node.hit_percentage), shape=node.shape, style=node.style)
     for edge in graph_structure.edges:
         dot.edge(edge.from_node, edge.to_node, color=edge.color, style=edge.style)
-    print(dot)
     return dot
     
 def generate_mind_map(graph_structure: GraphStructure):

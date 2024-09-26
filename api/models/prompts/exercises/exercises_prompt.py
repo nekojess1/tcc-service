@@ -1,16 +1,22 @@
-from api.models.prompts.exercises.exercises_examples import input_example, output_example
+from api.models.prompts.exercises.exercises_examples import input_format, output_format, output_example
 from api.models.prompts.exercises.exercises_instructions import context
 
 def get_exercise_prompt():
     """Generate an exercise with different subjects"""
     return f"""
-{context}
+        {context}
 
-# Exemplo de Entrada: 
+        Input format:
 
-{input_example}
+        {input_format}
 
-# Exemplo de Retorno JSON:
+        Output format:
 
-{output_example}
-"""
+        {output_format}
+
+        Return the exercise in JSON format.
+
+        Example filled return:
+
+        {output_example}
+        """
