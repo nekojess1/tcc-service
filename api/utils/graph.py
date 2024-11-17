@@ -30,7 +30,6 @@ def get_color_from_percentage(percentage):
 
 def get_graph(graph_structure: GraphStructure) -> Digraph:
     dot = Digraph(comment='Mapa Mental', engine='fdp')
-    print(graph_structure)
     for node in graph_structure.nodes:
         dot.node(node.id, node.description, color = get_color_from_percentage(node.hit_percentage), shape=node.shape, style=node.style)
     for edge in graph_structure.edges:

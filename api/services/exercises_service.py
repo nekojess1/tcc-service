@@ -4,7 +4,7 @@ from api.models.prompts.exercises.exercises_prompt import get_exercise_prompt
 from api.models.requests.exercises_request import ExerciseRequest
 
 def get_exercises(exercise_request: ExerciseRequest):
-    """Generates personalized study guide using OpenAI gpt-4-0125-preview"""
+    """Generates personalized exercises using OpenAI gpt-4-0125-preview"""
     completion = openai.chat.completions.create(
         model="gpt-4o",
         response_format={ "type": "json_object" },

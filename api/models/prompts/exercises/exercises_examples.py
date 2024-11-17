@@ -1,4 +1,4 @@
-input_example = """
+input_format = """
 {
   "topics": [
     {
@@ -14,7 +14,7 @@ input_example = """
 }
 """
 
-output_example = """
+output_format = """
 {
   "exercises": [
     {
@@ -52,5 +52,57 @@ output_example = """
     }
   ]
 }
+"""
+
+output_example = """"
+{
+  "exercises": [
+    {
+      "topic": "Geometria",
+      "questions": [
+        {
+          "type": "multiple_choice",
+          "question": "Qual é a fórmula para calcular a área de um triângulo?",
+          "options": [
+            "A = base × altura",
+            "A = lado × lado",
+            "A = 2 × π × raio",
+            "A = comprimento × largura"
+          ],
+          "answer": "A = base × altura"
+        },
+        {
+          "type": "open_ended",
+          "question": "Explique como você pode usar o teorema de Pitágoras para encontrar a hipotenusa de um triângulo retângulo.",
+          "answer": "Para encontrar a hipotenusa, eu uso a fórmula a² + b² = c², onde a e b são os catetos e c é a hipotenusa."
+        }
+      ]
+    },
+    {
+      "topic": "História",
+      "questions": [
+        {
+          "type": "multiple_choice",
+          "question": "Qual evento marcou o início da Revolução Francesa?",
+          "options": [
+            "A Queda da Bastilha",
+            "A assinatura da Declaração de Independência",
+            "A Revolução Industrial",
+            "A Guerra dos Cem Anos"
+          ],
+          "answer": "A Queda da Bastilha"
+        },
+        {
+          "type": "open_ended",
+          "question": "Discuta as causas da Revolução Francesa.",
+          "hints": ["Considere fatores sociais, econômicos e políticos."],
+          "answer": "As causas da Revolução Francesa incluem a desigualdade social entre os três estados, a crise financeira do governo e a influência das ideias iluministas."
+        }
+      ]
+    }
+  ]
+}
+
+
 """
 

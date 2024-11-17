@@ -18,7 +18,6 @@ input_example = """
     "question_id": "{question id}",
     "response": {
         "answer": "{student's answer to the question}",
-        "email": "{student's email}",
         "response_id": "{response id}",
     },
     "feedbackList": [list of feedbacks]
@@ -33,7 +32,6 @@ Input:
         "question_id": "123123",
         "response": {
             "answer": "Photosynthesis is the process by which plants, using solar energy, convert carbon dioxide and oxygen into glucose and water.",
-            "email": "student@mail.com",
             "response_id": "123123-12",
         },
         "language": "English"
