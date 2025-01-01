@@ -19,7 +19,7 @@ Please carefully analyze each of these rules before starting to create the exerc
      - Involves some analysis or application of knowledge.
      - May require connections between different concepts.
 
-   - Difficult:
+   - Hard:
      - Profound and critical understanding of the subject.
      - Involves multiple complex concepts or techniques.
      - Requires abstract reasoning or creative thinking to solve.
