@@ -1,15 +1,16 @@
 import openai
 import json
 from api.models.prompts.mind_maps.mind_map_prompt import get_mind_map_prompt
+
 from api.utils.graph import generate_mind_map, GraphStructure
 
 def get_mind_map(mindMapRequest):
     """Generates personalized feedback using OpenAI gpt-4-0125-preview"""
     completion = openai.chat.completions.create(
-        model="gpt-4-0125-preview",
+        model="gpt-4o",
         response_format={ "type": "json_object" },
         messages=[
-            {"role": "system", "content": get_mind_map_prompt()},
+            {"role": "system", "content": get_mind_map_prompt_old()},
             {"role": "user", "content": str(mindMapRequest)}
         ]
     )

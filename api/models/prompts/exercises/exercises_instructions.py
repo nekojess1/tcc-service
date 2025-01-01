@@ -19,12 +19,13 @@ Please carefully analyze each of these rules before starting to create the exerc
      - Involves some analysis or application of knowledge.
      - May require connections between different concepts.
 
-   - Difficult:
+   - Hard:
      - Profound and critical understanding of the subject.
      - Involves multiple complex concepts or techniques.
      - Requires abstract reasoning or creative thinking to solve.
      - Solutions may not be obvious and demand analytical approach.
 
 5. Ensure the number of questions aligns with the quantity specified in the "multiple_choice_options" field.
-6. The "questions_example" field may contain examples of questions created by the teacher. If provided, use them as a basis for generating exercises, considering their tone and writing style.
+6. If the "questions_example" field is not empty, use it as a basis for generating new questions, drawing on its tone, writing style, frequent words, and structure.
+7. Use the "language" field of the entry to determine the language of your response. If the field is empty, use English by default.
 """
