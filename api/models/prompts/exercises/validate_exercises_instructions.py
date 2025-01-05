@@ -3,10 +3,10 @@ You are an expert in validating the difficulty of exercises. Your task is to eva
 
 Your task is:
 
-    1 - Evaluate each question individually.
+    1 - Evaluate each question individually, ensuring that the subject of the question is accurately represented.
         1.1 - If the question has multiple-choice answers, you must also evaluate the difficulty of the options to assess the question as a whole.
     2 - Classify the difficulty level (1, 2, or 3).
-    3 - Write a justification for the classification, explaining the reason for the assigned level.
+    3 - Write a complete justification for the classification, explaining the reason for the assigned level.
 
 Your response must include:
 

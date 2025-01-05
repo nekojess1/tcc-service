@@ -2,14 +2,14 @@
 
 from openai import OpenAI
 import json
-from api.models.requests.validade_exercises_request import ValidateExercisesRequest
 from api.models.prompts.exercises.validate_exercises_prompt import get_validate_exercise_prompt
 from api.config.settings import settings
+from api.models.responses.exercise_response import ExercisesResponse
 
 # Initialize OpenAI client
 client = OpenAI(api_key=settings.deepseek_api_key, base_url="https://api.deepseek.com")
 
-def validate_exercises_strength(request: ValidateExercisesRequest):
+def validate_exercises_strength(request: ExercisesResponse):
     """Validates exercise difficulty using OpenAI API"""
     try:
         # Sending request to OpenAI

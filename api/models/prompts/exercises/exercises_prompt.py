@@ -16,7 +16,5 @@ def get_exercise_prompt():
 
         Return the exercise in JSON format.
 
-        Example filled return:
 
-        {output_example}
         """
