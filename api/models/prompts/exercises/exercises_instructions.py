@@ -19,7 +19,7 @@ Easy
       - Avoid including overlapping or ambiguous options.
 
     Example Multiple-choice Question:  
-    *What is the capital of France?*  
+    What is the capital of France? 
     a) Berlin  
     b) Madrid  
     c) Paris  
@@ -44,7 +44,7 @@ Intermediate
         - The correct answer may require logical connections or reasoning to identify.  
         - Avoid using direct quotes or facts that are too easy to identify from study materials.  
     Example Multiple-choice Question:  
-    *Which of the following best describes the process of photosynthesis in plants?*  
+    Which of the following best describes the process of photosynthesis in plants?
     a) Plants convert oxygen into glucose using sunlight.  
     b) Plants absorb carbon dioxide and water to produce oxygen and glucose.  
     c) Plants use sunlight to convert glucose into oxygen.  
@@ -52,7 +52,7 @@ Intermediate
     Explanation: This question combines two interconnected concepts (photosynthesis and plant biology). The student must apply knowledge of both the process and the correct equation, requiring a higher level of understanding.
 
     Example Open-ended Question:  
-    *Explain how the process of photosynthesis benefits the environment.*
+    Explain how the process of photosynthesis benefits the environment.
 
 ---
 
@@ -71,7 +71,7 @@ Hard
         - Include additional, seemingly irrelevant details in the question to simulate real-world problem-solving.  
 
     Example Multiple-choice Question:  
-    *A chemical reaction in a laboratory setup has the following conditions: 25°C, 1 atm pressure, and a reactant concentration of 0.5 mol/L. Given that the activation energy of the reaction is 50 kJ/mol and the temperature is increased to 35°C, what will likely happen to the reaction rate? Consider the Arrhenius equation in your response.*  
+    A chemical reaction in a laboratory setup has the following conditions: 25°C, 1 atm pressure, and a reactant concentration of 0.5 mol/L. Given that the activation energy of the reaction is 50 kJ/mol and the temperature is increased to 35°C, what will likely happen to the reaction rate? Consider the Arrhenius equation in your response.
     a) The reaction rate will double.  
     b) The reaction rate will decrease.  
     c) The reaction rate will increase significantly.  
@@ -79,7 +79,7 @@ Hard
     Explanation: This question integrates multiple advanced concepts (activation energy, temperature effect, reaction rate, and the Arrhenius equation). The distractors reflect common misunderstandings in interpreting these scientific principles. The student needs to synthesize the provided data, make logical connections, and apply abstract reasoning to determine the correct answer.
 
     Example Open-ended Question:  
-    *You are conducting a series of reactions in a laboratory where the temperature and reactant concentration vary. In one experiment, the reaction occurs at 25°C, and in another at 35°C. The activation energy for the reaction is 50 kJ/mol. Explain how the increase in temperature affects the reaction rate, using the Arrhenius equation to support your explanation. Additionally, discuss the role of activation energy and how it might influence the outcome of the reaction under these conditions. Consider the potential for other factors that could influence the rate as well, such as pressure or catalyst presence.*  
+    You are conducting a series of reactions in a laboratory where the temperature and reactant concentration vary. In one experiment, the reaction occurs at 25°C, and in another at 35°C. The activation energy for the reaction is 50 kJ/mol. Explain how the increase in temperature affects the reaction rate, using the Arrhenius equation to support your explanation. Additionally, discuss the role of activation energy and how it might influence the outcome of the reaction under these conditions. Consider the potential for other factors that could influence the rate as well, such as pressure or catalyst presence.  
 
     Explanation: This open-ended question now includes a scenario that simulates a real-world laboratory setup, providing detailed context. It requires the student to integrate knowledge of the Arrhenius equation, activation energy, and other factors that could influence the reaction rate. The question demands a deep understanding of chemistry and the application of abstract reasoning.
 
