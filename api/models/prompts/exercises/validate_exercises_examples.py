@@ -1,12 +1,24 @@
 # Input Format
 input_format = """
 {
-    "title": "{question title}",
-    "choices": [  # optional question choices
-        # Example of choices:
-        # "Option 1",
-        # "Option 2"
-    ]
+  "exercises": [
+    {
+      "topic": "Topic Name Here",
+      "questions": [
+        {
+          "type": "multiple_choice",
+          "question": "Insert multiple-choice question here.",
+          "options": ["Option 1", "Option 2", "Option 3", "Option 4"],
+          "answer": "Insert correct answer here"
+        },
+        {
+          "type": "open_ended",
+          "question": "Insert open-ended question here.",
+          "answer": "Insert correct answer here"
+        }
+      ]
+    }
+  ]
 }
 """
 
@@ -30,14 +42,26 @@ output_format = """
 # Input Example
 input_example = """
 {
-    "title": "What characteristic distinguishes bryophytes from vascular plants?",
-    "choices": [
-        "Presence of true roots",
-        "Absence of seeds and flowers",
-        "Dominant diploid sporophyte stage",
-        "Vascular tissue for water transport",
-        "Flowering reproductive structures"
-    ]
+  "exercises": [
+    {
+      "topic": "Genetics",
+      "questions": [
+        {
+          "type": "multiple_choice",
+          "question": "What is the basic unit of heredity?",
+          "options": [
+            "Gene",
+            "Chromosome",
+            "DNA",
+            "Protein",
+            "Cell"
+          ],
+          "answer": "Gene",
+          "hints": null
+        }
+      ]
+    }
+  ]
 }
 """
 
