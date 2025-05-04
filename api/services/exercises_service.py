@@ -6,10 +6,10 @@ from api.models.requests.exercises_request import ExerciseRequest
 def get_exercises(exercise_request: ExerciseRequest):
     """Generates personalized exercises using OpenAI gpt-4-0125-preview"""
     completion = openai.chat.completions.create(
-        model="gpt-4o",
+        model="o4-mini",
         response_format={ "type": "json_object" },
         messages=[
-            {"role": "system", "content": get_exercise_prompt()},
+            {"role": "system", "content": get_exercise_prompt(exercise_request)},
             {"role": "user", "content": str(exercise_request)}
         ]
     )

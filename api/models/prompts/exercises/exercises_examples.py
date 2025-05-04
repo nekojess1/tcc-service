@@ -45,7 +45,6 @@ output_format = """
         {
           "type": "open_ended",
           "question": "Insert open-ended question here.",
-          "hints": ["Insert hint(s) to solve the question, if necessary."],
           "answer": "Insert correct answer here"
         }
       ]
