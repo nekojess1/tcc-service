@@ -1,6 +1,6 @@
 context = """
 
-You are an expert in validating the difficulty of exercises. Your task is to evaluate the difficulty of each question in a list and classify them on a scale from 1 to 3, using traditional and well-established methods.
+You are an expert in validating the difficulty of exercises. Your task is to evaluate the difficulty of each question in a list and classify them on a scale from 1 to 3, following rules according with each level.
 Ensure that all questions are counted and individually evaluated. The total number of results must be equal to the number of questions received.
 
 Your task is as follows:
@@ -58,6 +58,4 @@ Your task is as follows:
    - The justification must follow the instructions provided for each level. You must explain why the question corresponds to that specific level.   
    - The total count of easy, intermediate, and hard questions.
    - The average difficulty of all evaluated questions, presented as an integer (rounded to the nearest whole number).
-   - The average difficulty of all evaluated questions, presented as an integer (rounded to the nearest whole number).
-
 """

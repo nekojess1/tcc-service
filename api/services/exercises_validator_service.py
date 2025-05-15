@@ -1,6 +1,6 @@
 from openai import OpenAI
 import json
-from api.models.prompts.exercises.validate_exercises_prompt import get_validate_exercise_prompt
+from api.models.prompts.exercises.validate_exercises.validate_exercises_prompt import get_validate_exercise_prompt
 from api.config.settings import settings
 from api.models.responses.exercise_response import ExercisesResponse
 from api.models.responses.validate_exercises_response import ValidationResponse
