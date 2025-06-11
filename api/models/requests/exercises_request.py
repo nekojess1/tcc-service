@@ -1,4 +1,3 @@
-from typing import List
 from pydantic import BaseModel
 
 class TopicRequest(BaseModel):
@@ -9,6 +8,6 @@ class TopicRequest(BaseModel):
     open_ended_qty: int
 
 class ExerciseRequest(BaseModel):
-    topics: List[TopicRequest]
+    topic: TopicRequest
     idiom: str
     difficulty: str
