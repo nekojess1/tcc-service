@@ -3,7 +3,9 @@ from pydantic import BaseModel
 
 
 class Exercises(BaseModel):
-    title: str
-    choices: Optional[List[str]] = None 
+    id: str
+    question: str
+    options: Optional[List[str]] = None 
+
 class ValidateExercisesRequest(BaseModel):
     questions: List[Exercises]
