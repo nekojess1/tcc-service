@@ -4,24 +4,4 @@ from api.models.prompts.exercises.validate_exercises.validate_exercises_instruct
 
 def get_validate_exercise_prompt():
     """Generate an exercise with different subjects"""
-    return f"""
-        {generic_context}
-
-        Input format:
-
-        {input_format}
-
-        Output format:
-
-        {output_format}
-
-        Return the exercise in JSON format.
-
-        Example filled return:
-
-        {output_example}
-        
-        Example filled input:
-        
-        {input_example}
-        """
+    return ""
