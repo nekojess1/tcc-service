@@ -4,6 +4,7 @@ import io
 from typing import List, Optional
 from pydantic import BaseModel
 import plotly.express as px
+import random
 
 class Node(BaseModel):
     id: str
@@ -41,7 +42,8 @@ def generate_mind_map(graph_structure: GraphStructure):
     img_stream = io.BytesIO()
     img_stream.write(dot.pipe(format='pdf'))
     img_stream.seek(0)
-    with open("test_mind_map.pdf", "wb") as f:
+    num = random.random()
+    with open(f"test_mind_map_{num}.pdf", "wb") as f:
         f.write(img_stream.read())
     img_stream.seek(0)  # Reset the stream position for reading in Response
     return Response(content=img_stream.read(), media_type="application/pdf")

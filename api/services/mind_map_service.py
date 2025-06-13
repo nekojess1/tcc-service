@@ -7,10 +7,10 @@ from api.utils.graph import generate_mind_map, GraphStructure
 def get_mind_map(mindMapRequest):
     """Generates personalized feedback using OpenAI gpt-4-0125-preview"""
     completion = openai.chat.completions.create(
-        model="gpt-4o",
+        model="chatgpt-4o-latest",
         response_format={ "type": "json_object" },
         messages=[
-            {"role": "system", "content": get_mind_map_prompt_old()},
+            {"role": "system", "content": get_mind_map_prompt()},
             {"role": "user", "content": str(mindMapRequest)}
         ]
     )
