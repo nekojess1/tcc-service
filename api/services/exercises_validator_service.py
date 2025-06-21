@@ -1,4 +1,5 @@
 from openai import OpenAI
+import openai
 import json
 from api.models.prompts.exercises.validate_exercises.validate_exercises_prompt import get_validate_exercise_prompt
 from api.models.prompts.exercises.validate_exercises.validate_exercises_prompt_elementary_students import get_validate_elementary_students_exercises_prompt
@@ -14,7 +15,7 @@ def validate_elementary_exercises_service(request: ValidateExercisesRequest):
     try:
         # Sending request to OpenAI
         completion = client.chat.completions.create(
-            model="deepseek-chat",
+            model="deepseek-reasoner",
             response_format={ "type": "json_object" },
             messages=[
                 {"role": "system", "content": get_validate_elementary_students_exercises_prompt()},
@@ -33,7 +34,7 @@ def validate_general_exercises_service(request: ValidateExercisesRequest):
     try:
         # Sending request to OpenAI
         completion = client.chat.completions.create(
-            model="deepseek-chat",
+            model="deepseek-reasoner",
             response_format={ "type": "json_object" },
             messages=[
                 {"role": "system", "content": get_validate_exercise_prompt()},
@@ -41,8 +42,10 @@ def validate_general_exercises_service(request: ValidateExercisesRequest):
             ],
             stream=False
         )
+        print(completion.choices[0].message.content)
         response_dict = json.loads(completion.choices[0].message.content)
         validated = ValidationResponse(**response_dict)
         return validated
     except Exception as e:
         return {"error": str(e)}
+    

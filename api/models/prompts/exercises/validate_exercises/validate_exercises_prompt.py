@@ -1,42 +1,45 @@
+from .validate_exercises_examples import output_format, general_students_list
+
 def get_validate_exercise_prompt():
-    return """
-# Contexto da Simulação
-Você é um especialista em educação que vai simular uma turma com 50 estudantes do terceiro ano do ensino médio.
-Esses alunos responderão às questões recebidas.
+    return f"""
+    # Contexto da Simulação
+    Você é um especialista em avaliação educacional. Sua tarefa é simular as respostas de uma turma com 1000 estudantes do ensino médio a um conjunto de questões e, em seguida, estimar os parâmetros da Teoria da Resposta ao Item (TRI) com base nessas respostas simuladas.
 
-# Perfil dos Alunos
-- Média da habilidade (θ): aproximadamente 0.
-- Desvio padrão da habilidade (θ): 2.
+    # Perfil dos Estudantes
+    - Cada estudante possui uma habilidade específica (θ), listada a seguir:
+    {general_students_list}
 
-# Passos para Simulação
-1. **Defina valores de habilidade** θᵢ para cada aluno (i=1…50).  
-2. **Simule respostas**  
-  - Para cada questão j e cada aluno i, use o nível de habilidade dele para tentar responder a pergunta. 
-  - Simule que você seja esse aluno e tente responder a pergunta. 
-  - Gere a matriz de respostas binárias Rᵢⱼ
-3. **Estime os parâmetros TRI**  
-   - Com a matriz de respostas R (50×Q) e os 50 valores de θ, aplique método de máxima verossimilhança marginal para estimar, para cada questão j:  
-     - **a_j** (discriminação)  
-     - **b_j** (dificuldade)  
-     - **c_j** (chance de acerto ao acaso)
+    # Regras para os Parâmetros TRI
+    - Parâmetro **c (acerto ao acaso)** deve ser estimado em um valor **≥ 0.2**.
+    - Parâmetro **b (dificuldade)** é o ponto na escala de habilidade em que a probabilidade de acerto passa a crescer rapidamente (ponto médio da curva).
+    - Parâmetro **a (discriminação)** é o grau de inclinação da curva logística, indicando o quanto a probabilidade de acerto muda rapidamente em função de pequenas mudanças na habilidade.
 
-# Formato do Retorno
-Retorne uma lista estruturada da seguinte forma:
+    # Etapas para realizar a Simulação e Estimação
 
-```json
-{
-  "questions": [
-    {
-      "id": "identificador_questao",
-      "parameters_tri": {"parameter_a": valor, "parameter_b": valor, "parameter_c": valor}
-    },
-    ...
-  ],
-  "students": [
-    "id": "id_estudante",
-    "nivel_habilidade": "habilidade_estudante" 
-  ]
-}
-'''
+    ## 1. Simulação das Respostas
+    Para cada questão j e cada aluno i:
+      - Determine a probabilidade de acerto usando uma função logística preliminar ou um critério coerente com a habilidade θᵢ.
+      - Simule o acerto (1) ou erro (0) com base nessa probabilidade.
+      - Gere uma matriz binária de respostas (Rᵢⱼ).
 
+    ## 2. Agrupamento (Binning) dos Estudantes
+      - Divida a escala das habilidades dos estudantes (intervalo total das habilidades θᵢ) em 24 faixas iguais.
+      - Para cada faixa:
+        - Identifique quantos estudantes pertencem à faixa.
+        - Calcule a taxa de acerto (quantidade de acertos / total de estudantes) para cada questão dentro dessa faixa.
+        - Use esses pontos empíricos (habilidade média por faixa x taxa de acerto) para estimar a curva de resposta ao item.
+
+    ## 3. Estimação dos Parâmetros TRI
+      - Ajuste a curva logística de 3 parâmetros aos pontos empíricos:
+        P(θ) = c + (1 - c) / (1 + e^(-a(θ - b)))
+      - A partir dessa curva, estime claramente:
+        - **a** (discriminação): grau de inclinação da curva.
+        - **b** (dificuldade): ponto médio da curva (onde a probabilidade sobe rapidamente).
+        - **c** (acerto ao acaso): limite inferior da probabilidade de acerto (≥ 0.2).
+
+    # Formato Esperado para a Resposta
+    Retorne sua resposta estritamente no seguinte formato JSON:
+    
+
+    {output_format}
 """
