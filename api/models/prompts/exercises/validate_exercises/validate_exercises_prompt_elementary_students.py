@@ -1,67 +1,46 @@
+from .validate_exercises_examples import output_format, elementary_student_list
+
 def get_validate_elementary_students_exercises_prompt():
-    return """
-# Contexto da Simulação
-Você é um especialista em educação que irá simular uma turma com 10 estudantes do ensino fundamental com habilidades muito baixas em leitura, interpretação e ciências humanas. Esses estudantes responderão às questões fornecidas, e sua tarefa é estimar os parâmetros da Teoria da Resposta ao Item (TRI) com base nas respostas.
+    return f"""
+      # Simulation Context
+      You are an educational assessment expert. Your task is to simulate the responses of a group of 1000 elementary school students with very low skills in reading, comprehension, and humanities. Based on their answers, estimate the Item Response Theory (IRT) parameters for each question.
 
-# Perfil dos Estudantes
-- As habilidades dos alunos (θ) devem ser geradas a partir de uma distribuição normal com:
-  - Média: -2.5
-  - Desvio padrão: 0.5
-- As habilidades devem estar no intervalo de -3.0 até -2.0.
+      # Student Profile
+      - Student abilities (θ) range from -3 to -2, and are listed below:
+      {elementary_student_list}
 
-# Regras para os Parâmetros TRI
-- O valor de **c (acerto ao acaso)** deve ser **≥ 0.2**
-- A dificuldade **b** será estimada com base na habilidade onde a curva de acerto cresce.
-- A discriminação **a** deve refletir o quanto a probabilidade de acerto muda em função da habilidade.
+      # Rules for IRT Parameters
+      - The **c parameter (guessing)** must be estimated as **≥ 0.2**.
+      - The **b parameter (difficulty)** is the point on the ability scale where the probability of a correct answer begins to increase rapidly.
+      - The **a parameter (discrimination)** reflects how sharply the probability of success increases with small changes in ability.
 
-# Passos para Simulação
+      # Simulation and Estimation Steps
 
-1. **Geração de habilidades**
-   - Gere 10 valores de θᵢ simulando as habilidades dos alunos com base no perfil acima.
+      ## 1. Simulating Student Responses
+      - For each question j and student i:
+        - Assume the student has ability θᵢ.
+        - Simulate the resolution of the question using only the knowledge expected from a student with that level of ability.
+        - If the student would answer correctly, register a 1; otherwise, register a 0.
+        - Generate a binary response matrix (Rᵢⱼ).
 
-2. **Simulação de Respostas**
-   - Para cada questão j e cada aluno i, simule se o aluno acertaria ou erraria com base em sua habilidade θᵢ.
-   - Gere a matriz de respostas binárias Rᵢⱼ (com valores 1 para acerto, 0 para erro).
+      ## 2. Grouping Students (Binning)
+      - Divide the θ range (-3 to -2) into 5 to 7 equal-width bins.
+      - For each interval:
+        - Count the number of students in the interval.
+        - Calculate the accuracy rate (correct answers / total students in the interval).
+        - Use these points (average θ in the interval × accuracy rate) to estimate the empirical response curve.
 
-3. **Divida os alunos em faixas de habilidade (binning)**
-   - Defina de 5 a 7 faixas igualmente espaçadas no intervalo de habilidade dos alunos (ex: de –3 a 3).
-   - Para cada faixa:
-     - Calcule a quantidade total de alunos com θᵢ naquela faixa.
-     - Calcule a quantidade de acertos daquela questão na faixa.
-     - Calcule a taxa de acertos (de 0 a 1).
-   - Utilize esses pontos de taxa por faixa como base empírica para estimar a curva da questão.
+      ## 3. Estimating IRT Parameters
+      - Fit the 3-parameter logistic curve:
+        P(θ) = c + (1 - c) / (1 + e^(-a(θ - b)))
+      - From this curve, estimate:
+        - **a**: discrimination (slope of the curve).
+        - **b**: difficulty (point of rapid increase).
+        - **c**: guessing parameter (≥ 0.2).
 
-4. **Estimação dos Parâmetros TRI**
-   - Utilize as proporções de acerto por faixa para ajustar uma curva logística de 3 parâmetros:
-     \[
-     P(θ) = c + \\frac{1 - c}{1 + e^{-a(θ - b)}}
-     \]
-   - A partir da curva ajustada, estime:
-     - **a**: parâmetro de discriminação
-     - **b**: parâmetro de dificuldade
-     - **c**: parâmetro de acerto ao acaso
+      # Expected Output Format
+      Return the data strictly in the following JSON format:
 
-# Formato Esperado da Resposta
-Retorne os dados no seguinte formato JSON:
+      {output_format}
 
-```json
-{
-  "questions": [
-    {
-      "id": "identificador_questao",
-      "parameters_tri": {
-        "parameter_a": valor,
-        "parameter_b": valor,
-        "parameter_c": valor
-      }
-    }
-  ],
-  "students": [
-    {
-      "id": "id_estudante",
-      "nivel_habilidade": valor
-    },
-    ...
-  ]
-}
 """
