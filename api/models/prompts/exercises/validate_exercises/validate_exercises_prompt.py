@@ -1,46 +1,36 @@
 from .validate_exercises_examples import output_format, general_students_list
 
-def get_validate_exercise_prompt():
+students_quantity = len(general_students_list)
+def get_validate_exercise_prompt(num_questions: int):
     return f"""
     # Simulation Context
-    You are an educational assessment specialist. Your task is to simulate the responses of 1000 high school students to a set of questions and then estimate the Item Response Theory (IRT) parameters based on these simulated responses.
+    You are an educational assessment specialist—but for each simulation, you will **role-play** 
+    as one of the high-school students.
 
-    # Student Profile
-    - Each student has a specific ability (θ), listed below:
-    {general_students_list}
+    # Role-Play Instruction
+    For each student i (with ability θᵢ) and each question j:
+    1. **Adopt the persona**
+    ex: “I am a student with ability θᵢ = 0.6553. Based on my skill level, I will now think about the question and decide if I can answer it correctly.”
+    2. **Provide an internal reasoning** (brief, hidden) like “I know this concept well” or “I struggle here,” 
+       then choose your answer.
+    3. **Emit only the final choice**: correct (1) or incorrect (0).
 
-    # Rules for IRT Parameters
-    - The **c parameter (guessing)** must be estimated as **≥ 0.2**.
-    - The **b parameter (difficulty)** is the point on the ability scale where the probability of a correct answer begins to increase rapidly.
-    - The **a parameter (discrimination)** reflects how sharply the probability of success increases with small changes in ability.
+    # Inputs
+    - Questions array (id, question, optional options)
+    - Student abilities:
+      {general_students_list}
 
-    # Steps for Simulation and Estimation
+    # Simulation Steps
+      1. For each student i and question j:
+         - Define c = 0.2  # 20% guessing chance for 5-option questions
+         - Compute Pᵢⱼ = c + (1 − c) × sigmoid(θᵢ).
+         - Generate a random number r between 0.0 (inclusive) and 1.0 (exclusive).
+         - If r < Pᵢⱼ, mark correct (1); otherwise mark incorrect (0).
 
-    ## 1. Simulating Student Responses
-    For each question j and each student i:
-      - Assume the student has ability θᵢ.
-      - Simulate the resolution of the question using only the knowledge expected from a student with that level of ability.
-      - If the student would answer correctly, register a 1; otherwise, register a 0.
-      - Generate a binary response matrix (Rᵢⱼ).
+      2. Collect all responses into the JSON structure:  
+         `{output_format}`
 
-    ## 2. Grouping Students (Binning)
-      - Divide the ability scale (θ) into 24 equal-width intervals.
-      - For each interval:
-        - Count the number of students in the interval.
-        - Calculate the accuracy rate (correct answers / total students in the interval).
-        - Use these points (average θ in the interval × accuracy rate) to estimate the empirical response curve.
+    # Output Requirements
+    Return **only** the JSON—**no** extra text or explanations.
 
-    ## 3. Estimating the IRT Parameters
-      - Fit the 3-parameter logistic curve:
-        P(θ) = c + (1 - c) / (1 + e^(-a(θ - b)))
-      - From this curve, estimate:
-        - **a**: discrimination (slope of the curve).
-        - **b**: difficulty (point of rapid increase).
-        - **c**: guessing parameter (≥ 0.2).
-
-    # Expected Response Format
-    Return your answer strictly in the following JSON format:
-
-    {output_format}
-"""
-
+    """

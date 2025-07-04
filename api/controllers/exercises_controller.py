@@ -6,7 +6,7 @@ from api.services.exercises_validator_service import (
 )
 from api.models.requests.exercises_request import ExerciseRequest
 from api.models.responses.exercise_response import ExercisesResponse
-from api.models.responses.validate_exercises_response import ValidationResponse
+from api.models.responses.validate_exercises_response import StudentAnswerResponse
 from api.models.requests.validade_exercises_request import ValidateExercisesRequest
 
 router = APIRouter()
@@ -20,7 +20,7 @@ async def generate_exercises(request_body: ExerciseRequest):
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
 
-@router.post('/validate/elementary-students', response_model=ValidationResponse, status_code=200)
+@router.post('/validate/elementary-students', response_model=StudentAnswerResponse, status_code=200)
 async def validate_elementary_exercises(request_body: ValidateExercisesRequest):
     """Endpoint para validar exercícios com estudantes do ensino fundamental."""
     try:
@@ -29,7 +29,7 @@ async def validate_elementary_exercises(request_body: ValidateExercisesRequest):
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
 
-@router.post('/validate/general-students', response_model=ValidationResponse, status_code=200)
+@router.post('/validate/general-students', response_model=StudentAnswerResponse, status_code=200)
 async def validate_general_exercises(request_body: ValidateExercisesRequest):
     """Endpoint para validar exercícios gerais para estudantes (ex.: ensino médio)."""
     try:
