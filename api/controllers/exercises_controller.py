@@ -8,6 +8,7 @@ from api.models.requests.exercises_request import ExerciseRequest
 from api.models.responses.exercise_response import ExercisesResponse
 from api.models.responses.validate_exercises_response import StudentAnswerResponse
 from api.models.requests.validade_exercises_request import ValidateExercisesRequest
+import time
 
 router = APIRouter()
 
@@ -33,7 +34,10 @@ async def validate_elementary_exercises(request_body: ValidateExercisesRequest):
 async def validate_general_exercises(request_body: ValidateExercisesRequest):
     """Endpoint para validar exercícios gerais para estudantes (ex.: ensino médio)."""
     try:
-        response = validate_general_exercises_service(request_body)
+        start_time = time.perf_counter()
+        response = await validate_general_exercises_service(request_body)
+        elapsed = time.perf_counter() - start_time
+        print(f"{elapsed:.4f}")
         return response
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))

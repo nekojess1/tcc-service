@@ -1,36 +1,41 @@
 from .validate_exercises_examples import output_format, general_students_list
 
 students_quantity = len(general_students_list)
-def get_validate_exercise_prompt(num_questions: int):
+
+def get_validate_exercise_prompt(num_questions: int, student_list: list):
     return f"""
-    # Simulation Context
-    You are an educational assessment specialist—but for each simulation, you will **role-play** 
-    as one of the high-school students.
+# Simulation Context
+You are an educational assessment specialist performing a simulation. For each question, you will **role-play** as a high-school student with a specific ability (θ).
 
-    # Role-Play Instruction
-    For each student i (with ability θᵢ) and each question j:
-    1. **Adopt the persona**
-    ex: “I am a student with ability θᵢ = 0.6553. Based on my skill level, I will now think about the question and decide if I can answer it correctly.”
-    2. **Provide an internal reasoning** (brief, hidden) like “I know this concept well” or “I struggle here,” 
-       then choose your answer.
-    3. **Emit only the final choice**: correct (1) or incorrect (0).
+# Role-Play Instructions
+For each student and question:
+1. **Adopt the student's persona explicitly**:
+   Example: "I am a student with ability θ = 0.6553. Given my ability level, I will attempt to answer question j."
 
-    # Inputs
-    - Questions array (id, question, optional options)
-    - Student abilities:
-      {general_students_list}
+2. **Internally reason your likelihood of answering correctly**, considering:
+   - If uncertain about the answer, you may **simulate a guess**, reflecting real-world student behavior.
+   - Even if you have high ability, remember you are not perfect; there is always at least a 10% chance you might make a mistake due to distractions, confusion, or uncertainty.
+   - If your ability clearly matches or slightly exceeds the difficulty of the question, you have a high chance of being correct (around 80-90%), but not guaranteed.
+   - If your ability is below the question's difficulty, you have only a **20% chance of guessing correctly** (1 correct option out of 5).
+   - If ability is less than difficulty, answer correctly only with a 20% guessing chance.
 
-    # Simulation Steps
-      1. For each student i and question j:
-         - Define c = 0.2  # 20% guessing chance for 5-option questions
-         - Compute Pᵢⱼ = c + (1 − c) × sigmoid(θᵢ).
-         - Generate a random number r between 0.0 (inclusive) and 1.0 (exclusive).
-         - If r < Pᵢⱼ, mark correct (1); otherwise mark incorrect (0).
+3. **Emit only the final choice**:
+   - Correct answer: 1
+   - Incorrect answer: 0
 
-      2. Collect all responses into the JSON structure:  
-         `{output_format}`
+# Inputs
+- **Questions**: An array containing objects with the fields `(id, question, options)`.
+- **Student abilities**:
+  {student_list}
 
-    # Output Requirements
-    Return **only** the JSON—**no** extra text or explanations.
+# Simulation Steps
+1. For each student `i` (ability θᵢ) and each question `j`:
+   - Simulate realistically, considering both skill level and occasional mistakes.
 
-    """
+2. Collect all simulated responses into the provided JSON structure:
+  {output_format}
+
+# Output Requirements
+- Respond exclusively with the JSON object containing the simulated answers.
+- Provide **no** additional text, comments, or explanations.
+"""

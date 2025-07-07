@@ -21,3 +21,8 @@ class ValidationResponse(BaseModel):
 
 class StudentAnswerResponse(BaseModel):
     responses: List[Response]
+
+class Student(BaseModel):
+    student_id: str
+    ability: float
+
