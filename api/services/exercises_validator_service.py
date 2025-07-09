@@ -1,4 +1,4 @@
-from openai import OpenAI
+from openai import AsyncOpenAI
 import openai
 import json
 from api.models.prompts.exercises.validate_exercises.validate_exercises_prompt import get_validate_exercise_prompt
@@ -9,11 +9,11 @@ from api.models.responses.validate_exercises_response import StudentAnswerRespon
 from api.models.prompts.exercises.validate_exercises.validate_exercises_examples import general_students_list
 import asyncio
 
-client = OpenAI(api_key=settings.deepseek_api_key, base_url="https://api.deepseek.com")
+client = AsyncOpenAI(api_key=settings.deepseek_api_key, base_url="https://api.deepseek.com")
 # Tamanho do batch
-BATCH_SIZE = 50
+BATCH_SIZE = 20
 # Quantas chamadas paralelas você quer fazer (para controlar rate limits)
-MAX_CONCURRENCY = 10
+MAX_CONCURRENCY = 5
 
 def validate_elementary_exercises_service(request: ValidateExercisesRequest):
     try:
@@ -59,14 +59,13 @@ async def validate_general_exercises_service(request: ValidateExercisesRequest) 
     # 4) Agrega todas as respostas num único array
     for resp_list in batch_results:
         all_responses.extend(resp_list)
-
     # 5) Retorna o modelo Pydantic
     return StudentAnswerResponse(responses=all_responses)
     
 async def call_validate_general_exercises_service(request: ValidateExercisesRequest, students: list):
     try:
         # Sending request to OpenAI
-        completion = client.chat.completions.create(
+        completion = await client.chat.completions.create(
             model="deepseek-chat",
             response_format={ "type": "json_object" },
             messages=[
@@ -75,8 +74,8 @@ async def call_validate_general_exercises_service(request: ValidateExercisesRequ
             ],
             stream=False
         )
-        print(completion.choices[0].message.content)
         response_dict = json.loads(completion.choices[0].message.content)
+        print(response_dict)
         return response_dict["responses"]
     except Exception as e:
         return {"error": str(e)}
