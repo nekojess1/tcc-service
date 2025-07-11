@@ -10,9 +10,7 @@ from api.models.prompts.exercises.validate_exercises.validate_exercises_examples
 import asyncio
 
 client = AsyncOpenAI(api_key=settings.deepseek_api_key, base_url="https://api.deepseek.com")
-# Tamanho do batch
 BATCH_SIZE = 20
-# Quantas chamadas paralelas você quer fazer (para controlar rate limits)
 MAX_CONCURRENCY = 5
 
 def validate_elementary_exercises_service(request: ValidateExercisesRequest):
