@@ -3,16 +3,59 @@
 output_format = """
 {
   "responses": [
-    {"student_id": "1", "ability": -1.6291, "answers": [0, 0, 0, 1, ...]}},
-    {"student_id": "2", "ability": 0.906, "answers": [0, 1, 1, 1, ...]}},
+    {"student_id": "1", "ability": -1.6291, "answers": [0, 1, 0 ...]}},
+    {"student_id": "2", "ability": 0.906, "answers": [1, 1, 0 ...]}},
   ]
 }
 """
 
 
+output_format_prompt_c = """
+{
+  "responses": [
+    {"student_id": "1", "ability": -1.6291, chosen_options: ["A", "B, "C",...], "answers": [0, 1, 0, ...]}},
+    {"student_id": "2", "ability": 0.906, "answers": [1, 1, 0 ...]}},
+  ],
+  questions: [{"id":1, "difficulty":2.2, "correct_tax": 45.42}]
+}
+
+{
+  "responses": [
+    {
+      "student_id": "1",
+      "ability": -1.6291,
+      "selected_options": ["A", "B", "C", "..."],
+      "answers": [0, 1, 0, "..."]
+    },
+    {
+      "student_id": "2",
+      "ability": 0.906,
+      "selected_options": ["B", "A", "C", "..."],
+      "answers": [1, 1, 0, "..."]
+    }
+  ],
+  "questions": [
+    {
+      "id": 1,
+      "difficulty": 2.2,
+      "correct_rate": 45.42
+    },
+    {
+      "id": 2,
+      "difficulty": 1.1,
+      "correct_rate": 72.29
+    },
+    {
+      "id": 3,
+      "difficulty": -0.34,
+      "correct_rate": 89.66
+    }
+  ]
+}
+
+"""
+
 general_students_list =  """
-
-
 {
   "students": [
     {
