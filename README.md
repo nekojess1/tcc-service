@@ -75,6 +75,7 @@ Exemplo:
 
 ```bash
 OPENAI_API_KEY=your_openai_api_key
+DEEPSEEK_API_KEY=your_deepseek_api_key
 ```
 2. Instale as dependências:
 

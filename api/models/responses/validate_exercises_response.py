@@ -1,19 +1,17 @@
 from pydantic import BaseModel
 from typing import List
 
-class ParametersTri(BaseModel):
-    parameter_a: float
-    parameter_b: float
-    parameter_c: float
-    
-class QuestionValidation(BaseModel):
+class Response(BaseModel):
+    student_id: str
+    ability: float
+    selected_options: List[str] = None
+    answers: List[int]
+
+class Questions(BaseModel):
     id: str
-    parameters_tri: ParametersTri
-    
-class Students(BaseModel):
-    id: str
-    nivel_habilidade: float
-    
-class ValidationResponse(BaseModel):
-    questions: List[QuestionValidation]
-    students: List[Students]
+    difficulty: float
+    correct_rate: float
+
+class StudentAnswerResponse(BaseModel):
+    responses: List[Response]
+    questions: List[Questions] = None

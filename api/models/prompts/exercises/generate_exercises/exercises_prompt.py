@@ -47,7 +47,7 @@ The main goal of this prompt is to ensure maximum consistency between the genera
 def get_questions_by_difficulty(difficulty):
     difficulty_examples = {
         "easy": easy_examples,
-        "intermediary": intermediary_examples,
+        "medium": intermediary_examples,
         "hard": hard_examples,
     }
     return difficulty_examples.get(difficulty, [])
